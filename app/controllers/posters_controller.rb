@@ -1,5 +1,7 @@
 class PostersController < ApplicationController
   def new
+    @pet = Pet.new
+    @pet.posters.build
   end
 
   def create

@@ -1,2 +1,15 @@
-<h1>Posters#new</h1>
-<p>Find me in app/views/posters/new.html.erb</p>
+<h1>New Pet Poster</h1>
+<p>So you lost your pet huh?</p>
+
+<%= simple_form_for @pet do |f| %>
+  <%= f.simple_fields_for :posters do |p| %>
+    <%= f.input :name %>
+    <%= f.input :species %>
+    <%= f.input :breed %>
+    <%= p.input :date_missing, as: :date %>
+    <%= f.input :color %>
+    <%= p.input :address %>
+  <% end %>
+
+  <%= f.submit 'Publish' %>
+<% end %>
