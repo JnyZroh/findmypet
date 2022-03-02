@@ -4,9 +4,9 @@ class PetsController < ApplicationController
 
   def create
     @pet = Pet.new(pet_params)
-    @pet.user = User.first
+    @pet.user = current_user
 
-    if @pet.save!
+    if @pet.save
       redirect_to poster_confirm_path(@pet.posters.last)
     else
       render 'posters/new'
@@ -22,6 +22,6 @@ class PetsController < ApplicationController
   private
 
   def pet_params
-    params.require(:pet).permit(:name, :species, :breed, :color, posters_attributes: %i[date_missing address])
+    params.require(:pet).permit(:name, :species, :breed, :color, photos: [], posters_attributes: %i[date_missing address])
   end
 end
