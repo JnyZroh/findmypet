@@ -3,25 +3,27 @@
   <div class="container d-flex">
 
 <%# if the report has photos %>
-  <div class="card-report">
+  <div class="card-report plus-image">
     <%# add photos once Cloudinary is integrated %>
     <%#= cl_image_path %>
-    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
-      <div>
+    <%# <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" /> %>
+      <div class="lowerDiv">
         <h3><%= @report.report_type %> <%= @report.species %></h3>
-        <p>Last seen around <%= @report.address %> on <%= @report.date_spotted %>. </p>
+        <p>Last seen <%= @report.address %> on <%= @report.date_spotted %> </p>
     </div>
   </div>
 
-<%# if the report does not have photos %>
+<%# if the report has photos %>
   <div class="card-report">
-    <div class="card-trip-infos">
-      <div>
+    <%# add photos once Cloudinary is integrated %>
+    <%#= cl_image_path %>
+    <%# <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" /> %>
+      <div class="noImageDiv">
         <h3><%= @report.report_type %> <%= @report.species %></h3>
-        <p>Last seen around <%= @report.address %> on <%= @report.date_spotted %>. </p>
-      </div>
+        <p>Last seen <%= @report.address %> on <%= @report.date_spotted %> </p>
     </div>
   </div>
+<%# if the report does not have photos %>
 
       <p>
 
@@ -41,7 +43,8 @@
 
 <div class="wrapper m-3">
   <div class="container">
-    <h2>Potential Matches</h2>
+    <h2>Potential Matches for </h2>
+
   </div>
 </div>
 
