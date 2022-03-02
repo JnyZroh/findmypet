@@ -1,4 +1,11 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://stlc.shopwhereilive.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-12-at-6.00.56-PM.jpg);">
+  <div class="container">
+    <h1><strong>Find My Pet</strong>!</h1>
+    <p>Look for your missing best friend.</p>
+  </div>
+</div>
+<div class="container-buttons">
+  <a class="btn btn-gradient" href="#">Lost My Pet</a>
+  <a class="btn btn-gradient" href="#">Spotted a Lost Pet</a>
+</div>
 <%= link_to "Spotted a Lost Pet", new_report_path %>
