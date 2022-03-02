@@ -1,5 +1,7 @@
 class PostersController < ApplicationController
   def new
+    @pet = Pet.new
+    @pet.posters.build
   end
 
   def create
@@ -15,5 +17,9 @@ class PostersController < ApplicationController
   end
 
   def index
+  end
+
+  def confirm
+    @poster = Poster.find(params[:poster_id])
   end
 end

@@ -5,7 +5,6 @@
   </div>
 </div>
 <div class="container-buttons">
-  <a class="btn btn-gradient" href="#">Lost My Pet</a>
-  <a class="btn btn-gradient" href="#">Spotted a Lost Pet</a>
+  <%= link_to "Spotted a Lost Pet", new_report_path, class:"btn btn-gradient" %>
+  <%= link_to "Lost My Pet", new_poster_path, class:"btn btn-gradient" %>
 </div>
-<%= link_to "Spotted a Lost Pet", new_report_path %>
