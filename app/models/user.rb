@@ -6,4 +6,7 @@ class User < ApplicationRecord
 
   has_many :pets
   has_many :posters, through: :pet
+  has_many :reports
+
+  has_one_attached :photo
 end
