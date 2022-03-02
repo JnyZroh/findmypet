@@ -1,2 +1,32 @@
-<h1>Reports#show</h1>
-<p>Find me in app/views/reports/show.html.erb</p>
+<div class="wrapper m-3">
+  <div class="container">
+    <h3>Report Submitted!</h3>
+      <p>
+        <%= @report.date_spotted %>
+      </p>
+      <p>
+        <%= @report.address %>
+      </p>
+      <p>
+        <%= @report.species %>
+      </p>
+      <p>
+        <%= @report.description %>
+      </p>
+      <p>
+        <%= @report.report_type %>
+      </p>
+  </div>
+</div>
+
+<div class="wrapper m-3">
+  <div class="container">
+    <h2>Potential Matches</h2>
+  </div>
+</div>
+
+<div class="wrapper m-3">
+  <div class="container">
+    <h2>Recently Found Pets</h2>
+  </div>
+</div>
