@@ -18,4 +18,8 @@ class PostersController < ApplicationController
 
   def index
   end
+
+  def confirm
+    @poster = Poster.find(params[:poster_id])
+  end
 end

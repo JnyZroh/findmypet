@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   resources :pets
   get '/my_pets', to: 'pets#my_pets'
 
-  resources :posters, only: %i[edit update show new create]
+  resources :posters, only: %i[edit update show new create] do
+    get 'confirm', to: :confirm
+  end
+
   get 'posters/:poster_id/print', to: 'posters#print'
   get 'posters/:poster_id/found', to: 'posters#mark_as_found'
 

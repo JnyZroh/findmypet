@@ -5,10 +5,11 @@ class PetsController < ApplicationController
   def create
     @pet = Pet.new(pet_params)
     @pet.user = User.first
+
     if @pet.save!
-      redirect_to
+      redirect_to poster_confirm_path(@pet.posters.last)
     else
-      render ''
+      render 'posters/new'
     end
   end
 
