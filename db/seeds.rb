@@ -10,4 +10,4 @@ pet1 = Pet.create!(name: "Fluffy", species: "dog", breed: "Husky", color: "red",
 
 poster1 = Poster.create!(date_missing: Date.new(2022,3,1), date_found: nil, found: false, comment: "Very friendly, if seen don't hesitate to catch it.", reward: 50, radius: 2, address: '5333 Avenue Casgrain Suite 102, Montréal QC', pet: pet1 )
 
-report1 = Report.create!(date_spotted: Date.new(2022,3,3), address: "15 Saint-viateur Rue E, Montral QC H2T 1A5", species: "dog", description: "Looks like a red Husky with white ears.", type: nil)
+report1 = Report.create!(date_spotted: Date.new(2022,3,3), address: "15 Saint-viateur Rue E, Montral QC H2T 1A5", species: "dog", description: "Looks like a red Husky with white ears.", report_type: nil)
