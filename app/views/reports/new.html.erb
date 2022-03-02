@@ -1,2 +1,16 @@
-<h1>Reports#new</h1>
-<p>Find me in app/views/reports/new.html.erb</p>
+
+<div class="wrapper m-3">
+  <div class="container">
+    <h1>Spotted Pet Info</h1>
+    <%= simple_form_for(@report) do |f| %>
+      <%= f.input :report_type, :collection => %w[Loose Caught], default: 'Loose' %>
+      <%= f.input :species, :collection => %w[Dog Cat] %>
+      <%= f.input :date_spotted %>
+      <%= f.input :address %>
+      <%= f.input :description %>
+      <%# add once Cloudinary is integrated %>
+      <%# <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+      <%= f.submit 'Submit Report' %>
+    <% end %>
+  </div>
+</div>

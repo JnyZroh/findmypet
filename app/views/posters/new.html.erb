@@ -1,2 +1,17 @@
-<h1>Posters#new</h1>
-<p>Find me in app/views/posters/new.html.erb</p>
+<div class="container">
+  <h1>New Pet Poster</h1>
+  <p>So you lost your pet huh?</p>
+
+  <%= simple_form_for @pet do |f| %>
+    <%= f.simple_fields_for :posters do |p| %>
+      <%= f.input :name %>
+      <%= p.input :date_missing, as: :date %>
+      <%= p.input :address %>
+      <%= f.input :species, label: 'Features', as: :select, collection: ['Dog', 'Cat'], prompt: 'Species' %>
+      <%= f.input :breed, label: false, as: :select, collection: ['Husky', 'Scotish Fold'], prompt: 'Breed' %>
+      <%= f.input :color, label: false, as: :select, collection: ['Yellow', 'Blue'], prompt: 'Color' %>
+    <% end %>
+
+    <%= f.submit 'Publish', class: 'btn btn-success' %>
+  <% end %>
+</div>
