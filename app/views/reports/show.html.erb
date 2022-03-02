@@ -1,20 +1,40 @@
 <div class="wrapper m-3">
-  <div class="container">
-    <h3>Report Submitted!</h3>
+    <h2>Report Submitted!</h2>
+  <div class="container d-flex">
+
+<%# if the report has photos %>
+  <div class="card-report">
+    <%# add photos once Cloudinary is integrated %>
+    <%#= cl_image_path %>
+    <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/greece.jpg" />
+      <div>
+        <h3><%= @report.report_type %> <%= @report.species %></h3>
+        <p>Last seen around <%= @report.address %> on <%= @report.date_spotted %>. </p>
+    </div>
+  </div>
+
+<%# if the report does not have photos %>
+  <div class="card-report">
+    <div class="card-trip-infos">
+      <div>
+        <h3><%= @report.report_type %> <%= @report.species %></h3>
+        <p>Last seen around <%= @report.address %> on <%= @report.date_spotted %>. </p>
+      </div>
+    </div>
+  </div>
+
       <p>
-        <%= @report.date_spotted %>
+
       </p>
       <p>
-        <%= @report.address %>
+
+      </p>
+
+      <p>
+
       </p>
       <p>
-        <%= @report.species %>
-      </p>
-      <p>
-        <%= @report.description %>
-      </p>
-      <p>
-        <%= @report.report_type %>
+
       </p>
   </div>
 </div>
