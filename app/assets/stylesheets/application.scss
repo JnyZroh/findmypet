@@ -11,3 +11,11 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.main-container {
+  height: 80vh;
+}
