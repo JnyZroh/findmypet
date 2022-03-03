@@ -8,8 +8,7 @@
       <%= f.input :date_spotted %>
       <%= f.input :address %>
       <%= f.input :description %>
-      <%# add once Cloudinary is integrated %>
-      <%# <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+      <%= f.input :photos, as: :file, input_html: { multiple: true } %>
       <%= f.submit 'Submit Report' %>
     <% end %>
   </div>
