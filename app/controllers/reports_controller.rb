@@ -5,10 +5,8 @@ class ReportsController < ApplicationController
 
   def create
     @report = Report.new(report_params)
-    # will we need to connect this pet to the user?
-    # will the users ever want to go back to the reports?
-    # @report.user = current_user
-    if @report.save
+    @report.user = current_user
+    if @report.save!
       redirect_to report_path(@report)
     else
       render :new
