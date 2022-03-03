@@ -24,4 +24,29 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-<h1><%= @poster.pet.name %></h1>
+
+
+<ul class="list-group d-flex flex-column align-items-center">
+  <li class="list-group-item"><h1><%= @poster.pet.name %></h1></li>
+  <li class="list-group-item"><p>Last seen : <%= @poster.date_missing %></li>
+  <li class="list-group-item"><p>Species : <%= @poster.pet.species %></p></li>
+  <li class="list-group-item"><p>Breed : <%= @poster.pet.breed %></p></li>
+  <li class="list-group-item"><p>Color : <%= @poster.pet.color %></p></li>
+  <li class="list-group-item"><p>Description : <%= @poster.pet.description %></p></li>
+</ul>
+
+
+<!--
+<div class="card-product">
+  <div class="card-product-infos">
+    <div class="posterinfo-container d-flex flex-column align-items-center">
+      <h1><%= @poster.pet.name %></h1>
+      <p>Last seen : <%= @poster.date_missing %>
+      <p>Species : <%= @poster.pet.species %></p>
+      <p>Breed : <%= @poster.pet.breed %></p>
+      <p>Color : <%= @poster.pet.color %></p>
+      <p>Description : <%= @poster.pet.description %></p>
+    </div>
+  </div>
+</div>
+-->
