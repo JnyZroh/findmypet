@@ -24,10 +24,10 @@
   </div>
 
   <% if user_signed_in? %>
-    <h2 style="color: white; font-weight:bold;">Your Poster</h2>
     <div class="container">
       <% current_user.pets.each do |pet| %>
         <% if pet.posters.any? %>
+          <h2 style="color: white; font-weight:bold;">Your Poster</h2>
           <div class="row justify-content-center my-3">
             <% pet.posters.each do |poster| %>
 
@@ -62,8 +62,8 @@
     </div>
 <% end %>
 
-  <h3 style="color: white; font-weight:bold;">Missing Pets Near You</h3>
   <div class="container">
+  <h3 style="color: white; font-weight:bold;">Missing Pets Near You</h3>
 
       <% if @posters.any? %>
         <div class="row justify-content-center my-3">
