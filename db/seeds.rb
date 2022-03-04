@@ -4,8 +4,8 @@ Pet.destroy_all
 User.destroy_all
 
 user1 = User.create!(first_name: "Stephane", last_name: "LaFontaine", phone_number: "514-123-4567", email: "steph@lf.ca", password: "mypassword", address: '5333 Avenue Casgrain Suite 102, Montréal QC' )
-#file1 = URI.open('https://avatars.githubusercontent.com/u/37821714?v=4')
-#user1.photo.attach(io: file1, filename: 'dp.png', content_type: 'image/png')
+file1 = URI.open('https://avatars.githubusercontent.com/u/37821714?v=4')
+user1.photo.attach(io: file1, filename: 'dp.png', content_type: 'image/png')
 
 user2 = User.create!(first_name: "Louis-Olivier", last_name: "Pelletier", phone_number: "514-987-6543", email: "louis@olivier.ca", password: "mypassword", address: '5333 Avenue Casgrain Suite 102, Montréal QC')
 #file2 = URI.open('https://ca.slack-edge.com/T02NE0241-UL76L0VK6-8fcb30413697-512')
