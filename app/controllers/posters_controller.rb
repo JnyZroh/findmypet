@@ -52,6 +52,6 @@ class PostersController < ApplicationController
   private
 
   def poster_params
-    params.require(:poster).permit(:date_missing, :address, pet_attributes: [:name, :species, :breed, :color, :id, photos: []])
+    params.require(:poster).permit(:date_missing, :address, :comment, pet_attributes: [:name, :species, :breed, :color, :id, photos: []])
   end
 end
