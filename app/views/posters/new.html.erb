@@ -1,15 +1,19 @@
-<div class="container">
+<div class="container" data-controller="poster-form">
   <h1>New Pet Poster</h1>
-  <p>So you lost your pet huh?</p>
 
   <%= simple_form_for @pet do |f| %>
     <%= f.simple_fields_for :posters do |p| %>
       <%= f.input :name %>
       <%= p.input :date_missing, as: :date %>
       <%= p.input :address %>
-      <%= f.input :species, label: 'Features', as: :select, collection: ['Dog', 'Cat'], prompt: 'Species' %>
-      <%= f.input :breed, label: false, as: :select, collection: ['Husky', 'Scotish Fold'], prompt: 'Breed' %>
-      <%= f.input :color, label: false, as: :select, collection: ['Yellow', 'Blue'], prompt: 'Color' %>
+      <%= f.input :species, label: 'Features', as: :select, collection: ['Dog', 'Cat'], prompt: 'Species', input_html: { data: {
+        poster_form_target: "species",
+        action: 'change->poster-form#update'
+      }} %>
+      <%= f.input :breed, label: false, as: :select, collection: [], prompt: 'Breed', input_html: { data: {
+        poster_form_target: "breed"
+      }}, disabled: true %>
+      <%= f.input :color, label: false, as: :select, collection: ['Black', 'Brown', 'White', 'Gray', 'Red', 'Multi-Colored'], prompt: 'Color' %>
       <%= f.input :photos, as: :file, input_html: { multiple: true } %>
     <% end %>
 

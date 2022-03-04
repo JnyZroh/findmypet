@@ -1,0 +1,11 @@
+<div class="d-flex justify-content-center">
+    <div class="card border-primary border-2" style="width: 65%; border-radius: 20px;">
+      <% photo_url = @poster.pet.photos[0].key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(@poster.pet.photos[0].key) %>
+      <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 175px; object-fit: cover; border-radius: 17px;" alt="Pet photo">
+      <div class="card-body text-center">
+        <h5 class="card-title"><strong><%= @poster.pet.name %></strong></h5>
+        <p class="card-text">Last seen: <%= @poster.address %></p>
+        <p class="card-text"><strong><%= @poster.date_missing %></strong></p>
+      </div>
+    </div>
+  </div>
