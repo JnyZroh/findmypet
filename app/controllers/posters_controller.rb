@@ -23,6 +23,17 @@ class PostersController < ApplicationController
 
   def show
     @poster = Poster.find(params[:id])
+    @markers =
+    [{
+      lat: @poster.latitude,
+      lng: @poster.longitude
+    }]
+    # #@markers = @poster.geocoded.map do |poster|
+    #   {
+    #     lat: poster.latitude,
+    #     lng: poster.longitude
+    #   }
+    # end
   end
 
   def print
