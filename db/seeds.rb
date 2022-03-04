@@ -11,6 +11,10 @@ user2 = User.create!(first_name: "Louis-Olivier", last_name: "Pelletier", phone_
 file2 = URI.open('https://ca.slack-edge.com/T02NE0241-UL76L0VK6-8fcb30413697-512')
 user2.photo.attach(io: file2, filename: 'dp.png', content_type: 'image/png')
 
+user3 = User.create!(first_name: "David", last_name: "Attar", phone_number: "514-233-6553", email: "david@attar.ca", password: "mypassword", address: '5333 Avenue Casgrain Suite 102, Montréal QC')
+file3 = URI.open('https://avatars.githubusercontent.com/u/93945915?v=4')
+user3.photo.attach(io: file3, filename: 'dp.png', content_type: 'image/png')
+
 pet1 = Pet.create!(name: "Fluffy", species: "dog", breed: "Husky", color: "red", description: "Red Husky with white ears", user: user1)
 pet1.photos.attach(io: File.open(Rails.root.join('app/assets/images/Pet1_Red-Husky.png')),
                   filename: 'Pet1_Red-Husky.png')
