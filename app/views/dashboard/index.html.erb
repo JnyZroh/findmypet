@@ -1,6 +1,6 @@
 <div class="container mt-2">
   <h1>Dashboard</h1>
-  <div style="background-color: #046E8F; border-radius: 10px; padding: 10px;">
+  <div class="mb-3" style="background-color: #046E8F; border-radius: 10px; padding: 10px;">
     <div class="row">
       <div class="col-5 text-center" style="padding: 0px;">
         <% photo_url = current_user.photo.key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(current_user.photo.key) %>
@@ -31,11 +31,52 @@
     </div>
     <div class="row mt-3">
       <div class="d-grid col-6 mx-auto">
-        <button class="btn btn-primary" style="border-radius: 10px;" type="button">Messages</button>
+        <button class="btn btn-dark" style="border-radius: 10px;" type="button">Messages</button>
       </div>
       <div class="d-grid col-6 mx-auto">
-        <button class="btn btn-primary" style="border-radius: 10px;" type="button">Notifications</button>
+        <button class="btn btn-dark" style="border-radius: 10px;" type="button">Notifications</button>
       </div>
     </div>
   </div>
+
+  <h3>My Posters</h3>
+  <% @pets.each do |pet| %>
+    <% if pet.posters.any? %>
+      <% pet.posters.each do |poster| %>
+        <div style="background-color: white; border-radius: 10px; padding:0px;">
+          <div class="row">
+            <div class="col-6">
+              <% photo_url = pet.photos.empty? ? 'https://www.cityofkingston.ca/documents/10180/3344460/Nav_Licensing_license.jpg' : cl_image_path(pet.photos[0].key) %>
+              <img src="<%= photo_url %>" class="img-fluid" style="width: 165px; height:165px; border-radius: 10px; object-fit: cover;" alt="user profile picture">
+            </div>
+            <div class="col-6" style="padding: 0px; color: white;">
+              <div class="d-flex flex-column bd-highlight">
+                <div class="bd-highlight">
+                  <p style="margin-bottom: 5px; font-size: 13px;">
+                    <strong>Name:</strong><br>
+                    <%= current_user.first_name %> <%= current_user.last_name %>
+                  </p>
+                </div>
+                <div class="bd-highlight">
+                  <p style="margin-bottom: 5px; font-size: 13px;">
+                    <strong>Phone:</strong><br>
+                    <%= current_user.phone_number %>
+                  </p>
+                </div>
+                <div class="bd-highlight">
+                  <p style="margin-bottom: 5px; font-size: 13px;">
+                    <strong>Email:</strong><br>
+                    <%= current_user.email %>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3 text-center">
+            <p><strong>Other ways to locate Sesame</strong></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
 </div>
