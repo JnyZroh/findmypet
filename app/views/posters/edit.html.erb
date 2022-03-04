@@ -1,0 +1,18 @@
+<div class="container">
+  <h1>Edit Pet Poster</h1>
+
+  <%= simple_form_for @poster do |p| %>
+    <%= p.simple_fields_for :pet do |f| %>
+      <%= f.input :name %>
+      <%= p.input :date_missing, as: :date %>
+      <%= p.input :address %>
+      <%= f.input :species, label: 'Features', as: :select, collection: ['Dog', 'Cat'], prompt: 'Species' %>
+      <%= f.input :breed, label: false, as: :select, collection: ['Husky', 'Scotish Fold'], prompt: 'Breed' %>
+      <%= f.input :color, label: false, as: :select, collection: ['Yellow', 'Blue'], prompt: 'Color' %>
+      <%= p.input :comment %>
+      <%#= f.input :photos, as: :file, input_html: { multiple: true } %>
+    <% end %>
+
+    <%= p.submit 'Update', class: 'btn btn-success' %>
+  <% end %>
+</div>

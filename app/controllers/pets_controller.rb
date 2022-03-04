@@ -13,6 +13,9 @@ class PetsController < ApplicationController
     end
   end
 
+  def update
+  end
+
   def my_pets
   end
 
