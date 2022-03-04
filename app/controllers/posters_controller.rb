@@ -32,6 +32,13 @@ class PostersController < ApplicationController
   end
 
   def index
+    @pets = Bestfriend.all
+    @markers = @pets.geocoded.map do |flat|
+      {
+        lat: flat.latitude,
+        lng: flat.longitude
+      }
+    end
   end
 
   def confirm
