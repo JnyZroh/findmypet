@@ -24,7 +24,7 @@ pet4 = Pet.create!(name: "Bully", species: "cat", breed: "Mixed", color: "gray",
 pet4.photos.attach(io: File.open(Rails.root.join('app/assets/images/Pet4_Tiger.png')),
                   filename: 'Pet4_Tiger.png')
 
-poster1 = Poster.create!(date_missing: Date.new(2022,3,1), date_found: nil, found: false, comment: "Very friendly, if seen don't hesitate to catch it.", reward: 50, radius: 2, address: '5333 Avenue Casgrain Suite 102, Montréal QC', pet: pet1 )
+poster1 = Poster.create!(date_missing: Date.new(2022,3,1), date_found: nil, found: false, comment: "Very friendly, if seen don't hesitate to catch it.", reward: 50, radius: 2, address: '5333 Avenue Casgrain, Montréal QC', pet: pet1 )
 poster2 = Poster.create!(date_missing: Date.new(2022,3,2), date_found: nil, found: false, comment: "A bit nervous so please approach him slowly. Lure with food, if possible.", reward: 50, radius: 2, address: '23 Rue Bernard O, Montréal, QC H2T 2J6', pet: pet2 )
 poster3 = Poster.create!(date_missing: Date.new(2022,3,2), date_found: nil, found: false, comment: "He still has his leash attached. It's a yellow and blue leash ", reward: 50, radius: 2, address: '74 Av. Fairmount O, Montréal, QC H2T 2M2', pet: pet3 )
 poster4 = Poster.create!(date_missing: Date.new(2022,3,3), date_found: nil, found: false, comment: "Friendly but timid. And he will bite but he's small so it won't hurt!", reward: 50, radius: 2, address: '158 Rue Saint- Viateur O, Montréal, QC H2T 2L4', pet: pet4 )
