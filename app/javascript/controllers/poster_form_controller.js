@@ -4,15 +4,16 @@ export default class extends Controller {
   static targets = [ "species", "breed"]
 
   initialize() {
-    this.dogBreeds = '<option value="german-potato">German Potato</option>\
-                      <option value="scotish-potato">Scotish Potato</option>';
+    this.dogBreeds = '<option value="mixed">Mixed</option>\
+                      <option value="husky">Husky</option>\
+                      <option value="labrador">Labrador</option>';
 
-    this.catBreeds = '<option value="scotish-fold">Scotish Fold</option>\
-                      <option value="crazy-potato">Crazy potato</option>';
+    this.catBreeds = '<option value="mixed">Mixed</option>\
+                      <option value="scotish-fold">Scotish Fold</option>\
+                      <option value="bengal">Bengal</option>';
   }
 
   connect() {
-    this.breedTarget.disabled = true;
     console.log(this.speciesTarget);
     console.log(this.breedTarget);
   }
