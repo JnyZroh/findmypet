@@ -1,25 +1,33 @@
-<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+<div id="petImagesCarousel" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <% @poster.pet.photos.each_with_index do |photo, index| %>
+      <% if index == 0 %>
+        <button type="button" data-bs-target="#petImagesCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <% else %>
+        <button type="button" data-bs-target="#petImagesCarousel" data-bs-slide-to="<%= index %>" aria-label="Slide <%= index + 1 %> "></button>
+      <% end %>
+    <% end %>
   </div>
   <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="https://cdn.wallpapersafari.com/11/57/9VohUb.jpg" class="d-block w-100" alt="profile 1">
-    </div>
-    <div class="carousel-item">
-      <img src="https://wallup.net/wp-content/uploads/2017/03/15/113305-Siberian_Husky-748x421.jpg" class="d-block w-100" alt="profile 2">
-    </div>
-    <div class="carousel-item">
-      <img src="https://cdn.wallpapersafari.com/51/74/LNRO4W.jpg" class="d-block w-100" alt="profile 3">
-    </div>
+    <% @poster.pet.photos.each_with_index do |photo, index| %>
+      <% if index == 0 %>
+        <div class="carousel-item active">
+          <% photo_url = cl_image_path(photo.key) %>
+          <img src="<%= photo_url %>"  class="d-block w-100" style="max-height: 600px; object-fit: cover;" alt="A different angle of the same pet">
+        </div>
+      <% else %>
+        <div class="carousel-item">
+          <% photo_url = cl_image_path(photo.key) %>
+          <img src="<%= photo_url %>"  class="d-block w-100" style="max-height: 600px; object-fit: cover;" alt="A different angle of the same pet">
+        </div>
+      <% end %>
+    <% end %>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+  <button class="carousel-control-prev" type="button" data-bs-target="#petImagesCarousel" data-bs-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+  <button class="carousel-control-next" type="button" data-bs-target="#petImagesCarousel" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="visually-hidden">Next</span>
   </button>
