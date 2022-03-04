@@ -18,19 +18,22 @@
         <% pet.posters.each do |poster| %>
 
           <div class="col-6">
-            <div class="card" style="max-height: 30vh; border-radius: 20px;">
-              <% photo_url = pet.photos.empty? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(pet.photos[0].key) %>
-              <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="max-height: 50%; object-fit: cover; border-radius: 17px;" alt="Pet photo">
+            <div class="card" style="height: 30vh; border-radius: 20px; ">
+              <% photo_url = pet.photos.empty? ? 'https://www.vets4pets.com/globalassets/close-up-of-cat-looking-up.jpg?w=585&scale=down' : cl_image_path(pet.photos[0].key) %>
+              <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 70%; object-fit: cover; border-radius: 20px;" alt="Pet photo">
               <div class="card-body text-center">
                 <h5 class="card-title"><strong><%= poster.pet.name %></strong></h5>
-                <p class="card-text">Last seen: <%= poster.address %></p>
+                <p class="card-text">Last seen: <%= truncate(poster.address, :length => 15) %></p>
                 <p class="card-text"><strong><%= poster.date_missing %></strong></p>
               </div>
             </div>
           </div>
 
-          <div class="col-5" style="border:2px solid black">
-
+          <div class="col-5">
+            <h4>Updates</h4>
+            <div class="updates">No other updates yet!</div>
+             <div class="updates">Your poster is live.</div>
+            <div style="text-align:right"><%= link_to "View all", "/my_pets", class: "seeMoreLink"%></div>
           </div>
         <% end %>
       </div>
@@ -45,21 +48,21 @@
   <div class="row">
     <div class="col">
       <div class="card" style="border-radius: 20px;">
-    <img src="https://gfp-2a3tnpzj.stackpathdns.com/wp-content/uploads/2018/06/dog-breeds-of-famous-dogs-1600x1065.jpg" alt="Avatar" style="width:100%; height: 100px;">
-    <div class="container mt-2">
-      <h4><b>Name</b></h4>
-      <p>Location</p>
-      <p><strong>Date</strong></p>
+    <img src="https://gfp-2a3tnpzj.stackpathdns.com/wp-content/uploads/2018/06/dog-breeds-of-famous-dogs-1600x1065.jpg" alt="Avatar" style="width:100%; height: 100px; border-radius: 20px 20px 0 0;">
+    <div class="card-body text-center">
+      <h5 class="card-title"><strong>Name</strong></h5>
+      <p class="card-text">Last seen: Location</p>
+      <p class="card-text"><strong>Date</strong></p>
     </div>
   </div>
     </div>
     <div class="col">
       <div class="card" style="border-radius: 20px;">
-    <img src="https://www.vets4pets.com/globalassets/close-up-of-cat-looking-up.jpg?w=585&scale=down" alt="Avatar" style="width:100%; height: 100px;">
-    <div class="container mt-2">
-      <h4><b>Name</b></h4>
-      <p>Location</p>
-      <p><strong>Date</strong></p>
+    <img src="https://www.vets4pets.com/globalassets/close-up-of-cat-looking-up.jpg?w=585&scale=down" alt="Avatar" style="width:100%; height: 100px; border-radius: 20px 20px 0 0;">
+    <div class="card-body text-center">
+      <h5 class="card-title"><strong>Name</strong></h5>
+      <p class="card-text">Last seen: Location</p>
+      <p class="card-text"><strong>Date</strong></p>
     </div>
   </div>
     </div>
