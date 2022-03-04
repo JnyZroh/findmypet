@@ -23,37 +23,39 @@
     </div>
   </div>
 
-  <h2 style="color: white; font-weight:bold;">Your Poster</h2>
-  <div class="container">
-    <% current_user.pets.each do |pet| %>
-      <% if pet.posters.any? %>
-        <div class="row justify-content-center my-3">
-          <% pet.posters.each do |poster| %>
+  <% if user_signed_in? %>
+    <h2 style="color: white; font-weight:bold;">Your Poster</h2>
+    <div class="container">
+      <% current_user.pets.each do |pet| %>
+        <% if pet.posters.any? %>
+          <div class="row justify-content-center my-3">
+            <% pet.posters.each do |poster| %>
 
-            <div class="col-6">
-              <div class="card" style="height: 30vh; border-radius: 20px; ">
-                <% photo_url = pet.photos.empty? ? 'https://www.vets4pets.com/globalassets/close-up-of-cat-looking-up.jpg?w=585&scale=down' : cl_image_path(pet.photos[0].key) %>
-                <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 70%; object-fit: cover; border-radius: 20px;" alt="Pet photo">
-                <div class="card-body text-center">
-                  <h5 class="card-title"><strong><%= poster.pet.name %></strong></h5>
-                  <p class="card-text">Last seen: <%= truncate(poster.address, :length => 15) %></p>
-                  <p class="card-text"><strong><%= poster.date_missing %></strong></p>
+              <div class="col-6">
+                <div class="card" style="height: 30vh; border-radius: 20px; ">
+                  <% photo_url = pet.photos.empty? ? 'https://www.vets4pets.com/globalassets/close-up-of-cat-looking-up.jpg?w=585&scale=down' : cl_image_path(pet.photos[0].key) %>
+                  <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 70%; object-fit: cover; border-radius: 20px;" alt="Pet photo">
+                  <div class="card-body text-center">
+                    <h5 class="card-title"><strong><%= poster.pet.name %></strong></h5>
+                    <p class="card-text">Last seen: <%= truncate(poster.address, :length => 15) %></p>
+                    <p class="card-text"><strong><%= poster.date_missing %></strong></p>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div class="col-5">
-              <h4  style="color: white;">Updates</h4>
-              <div class="updates">No other updates yet!</div>
-              <div class="updates">Your poster is live.</div>
-              <div style="text-align:right"><%= link_to "View all", "/my_pets", class: "seeMoreLink"%></div>
-            </div>
-          
-          <% end %>
-        </div>
+              <div class="col-5">
+                <h4  style="color: white;">Updates</h4>
+                <div class="updates">No other updates yet!</div>
+                <div class="updates">Your poster is live.</div>
+                <div style="text-align:right"><%= link_to "View all", "/my_pets", class: "seeMoreLink"%></div>
+              </div>
+
+            <% end %>
+          </div>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+<% end %>
 
   <h3 style="color: white; font-weight:bold;">Missing Pets Near You</h3>
   <div class="container">
@@ -79,7 +81,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="d-flex justify-content-end align-items-end">
       <a class="btn btn-ghost" href="#">See more</a>
     </div>
