@@ -4,16 +4,20 @@
      <img src="https://cdn-icons-png.flaticon.com/512/1076/1076928.png" />
      <% end %>
 
-    <% photo_url = current_user.photo.key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(current_user.photo.key) %>
-
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <%= image_tag photo_url, class: "avatar" %>
-    </button>
+    <% if user_signed_in? %>
+      <% photo_url = current_user.photo.key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(current_user.photo.key) %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <%= image_tag photo_url, class: "avatar" %>
+      </button>
+    <% else %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <% end %>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
-      <% if user_signed_in? %>
+        <% if user_signed_in? %>
           <li class="nav-item active">
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
@@ -24,13 +28,11 @@
              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </li>
 
-          <% else %>
+        <% else %>
           <li class="nav-item active">
             <%= link_to "Login", new_user_session_path, class: "nav-link" %>
           </li>
-          <% end %>
-          <!--li class="nav-item"-->
-          <!--/li-->
+        <% end %>
       </ul>
     </div>
   </div>
