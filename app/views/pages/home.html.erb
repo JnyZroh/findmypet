@@ -1,21 +1,22 @@
 <div style="background-color: #046E8F;">
-  <div class="banner mt-0" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://stlc.shopwhereilive.com/wp-content/uploads/2020/05/Screen-Shot-2020-05-12-at-6.00.56-PM.jpg);">
+  <div class="banner mt-0">
     <div class="container">
       <h1><strong>Find My Pet</strong>!</h1>
       <p>Look for your missing best friend.</p>
     </div>
+    <img src="/assets/wave.png" alt="Overlay">
   </div>
 
   <div class="container">
-    <div class="d-flex justify-content-between mt-3 mb-3">
-      <div class="d-grid gap-2 col-5 mx-auto">
-        <%= link_to new_poster_path, class:"btn", style:"max-width: 200px; font-size:smaller; border-color: white; color: white; border-radius: 10px;" do %>
+    <div class="d-flex justify-content-between mt-3 mb-3 text-center">
+      <div class="col-5 mx-auto">
+        <%= link_to new_poster_path, class:"btn", style:"width: 150px; font-size:smaller; border-color: white; color: white; border-radius: 10px;" do %>
           <span style="font-weight:bold; font-size:200%;">＋</span><br>
           Lost My Pet
         <% end %>
       </div>
-      <div class="d-grid gap-2 col-5 mx-auto">
-        <%= link_to new_report_path, class:"btn", style:"max-width: 200px; font-size:smaller; border-color: white; color: white; border-radius: 10px;" do %>
+      <div class="col-5 mx-auto">
+        <%= link_to new_report_path, class:"btn", style:"width: 150px; font-size:smaller; border-color: white; color: white; border-radius: 10px;" do %>
           <span style="font-weight:bold; font-size:200%;">＋</span><br>
           Spotted a Pet
         <% end %>
@@ -60,35 +61,45 @@
         <% end %>
       <% end %>
     </div>
-<% end %>
+  <% end %>
 
   <div class="container">
-  <h3 style="color: white; font-weight:bold;">Missing Pets Near You</h3>
+    <h3 style="color: white; font-weight:bold;">Missing Pets Near You</h3>
 
-      <% if @posters.any? %>
-        <div class="row justify-content-center my-3">
-          <% @posters.each do |poster| %>
-            <% if poster.pet.user != current_user %>
-              <div class="col-6 mb-2">
-                  <%= link_to poster_path(poster.id) do %>
-                <div class="card" style="height: 30vh; border-radius: 20px; ">
-                  <%# <div style="height: 70%;"> %>
-                    <% photo_url = poster.pet.photos.empty? ? 'https://www.vets4pets.com/globalassets/close-up-of-cat-looking-up.jpg?w=585&scale=down' : cl_image_path(poster.pet.photos[0].key) %>
-                    <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="object-fit: cover; border-radius: 20px;" alt="Pet photo">
-                  <%# </div> %>
-                  <div class="card-body text-center">
-                    <h5 class="card-title"><strong><%= poster.pet.name %></strong></h5>
-                    <p class="card-text">Last seen: <%= truncate(poster.address, :length => 15) %></p>
-                    <p class="card-text"><strong><%= poster.date_missing %></strong></p>
-                  </div>
+    <% if @posters.any? %>
+      <div class="row row-cols-2 row-cols-md-4 gy-3">
+        <% @posters.each do |poster| %>
+          <% if poster.pet.user != current_user %>
+            <div class="col mb-2">
+              <div class="card mx-auto" style="height: 250px; border-radius: 20px; max-width: 170px;">
+                <% photo_url = poster.pet.photos.empty? ? 'https://www.vets4pets.com/globalassets/close-up-of-cat-looking-up.jpg?w=585&scale=down' : cl_image_path(poster.pet.photos[0].key) %>
+                <% waves = ['/assets/wave-1.png', '/assets/wave-2.png', '/assets/wave-3.png', '/assets/wave-4.png', '/assets/wave-5.png'] %>
+                <div class="parent">
+                  <img src="<%= photo_url %>" class="card-img-top image1 rounded-bottom" style="object-fit: cover; border-radius: 19px; height: 130px;" alt="Pet photo">
+                  <img src="/assets/overlay.png" class="card-img-top image2 rounded-bottom" style="object-fit: cover; border-radius: 20px; height: 135px;" alt="Overlay">
                 </div>
-              <% end %>
+                <div class="card-body text-center p-1">
+                  <h5 class="card-title" style="font-size: 24px;">
+                    <strong><%= poster.pet.name %></strong>
+                  </h5>
+                  <p class="card-text" style="font-size: 15px;">
+                    Last seen:
+                  </p>
+                  <p class="card-text" style="font-size: 14px; line-height: 1em;">
+                    <%= truncate(poster.address) %>
+                  </p>
+                  <p class="card-text" style="font-size: 15px; line-height: 2em;">
+                    <strong><%= poster.date_missing %></strong>
+                  </p>
+                  <%= link_to "", poster_path(poster.id), class:"stretched-link"%>
+                </div>
               </div>
-            <% end %>
-
+            </div>
           <% end %>
-        </div>
-      <% end %>
+
+        <% end %>
+      </div>
+    <% end %>
 
     <div class="d-flex justify-content-end align-items-end">
       <a class="btn btn-ghost" href="#">See more</a>
