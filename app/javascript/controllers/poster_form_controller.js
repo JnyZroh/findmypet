@@ -18,6 +18,12 @@ export default class extends Controller {
   }
 
   connect() {
+    if (this.speciesTarget.value === "Dog") {
+      this.breedTarget.innerHTML = this.dogBreeds;
+    }else if (this.speciesTarget.value === "Cat") {
+      this.breedTarget.innerHTML = this.catBreeds;
+    }
+
     flatpickr(".datepicker", {
       maxDate: "today"
     });
