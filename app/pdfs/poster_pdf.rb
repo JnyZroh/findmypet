@@ -12,16 +12,16 @@ class PosterPdf < Prawn::Document
   end
 
   def image
-
+    text "Add image"
   end
 
   def details
     move_down 20
-    text "now add details"
+    text "Add pet details"
   end
 
   def contact
     move_down 40
-    text "now add contact"
+    text "Add contact"
   end
 end
