@@ -1,35 +1,55 @@
 <div class="wrapper m-3">
   <div class="container">
     <h3>Report Submitted!</h3>
-      <p>
-        <%= @report.date_spotted %>
-      </p>
-      <p>
-        <%= @report.address %>
-      </p>
-      <p>
-        <%= @report.species %>
-      </p>
-      <p>
-        <%= @report.description %>
-      </p>
-      <p>
-        <%= @report.report_type %>
-      </p>
-      <% @report.photos.each do |photo| %>
-        <%= cl_image_tag photo.key, height: 300, width: 400, crop: :fill %>
-      <% end %>
+
+    <div class="d-flex justify-content-center">
+      <div class="card border-primary border-2" style="width: 65%; border-radius: 20px;">
+        <% photo_url = @report.photos[0].key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(@report.photos[0].key) %>
+        <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 175px; object-fit: cover; border-radius: 17px;" alt="Pet photo">
+        <div class="card-body text-center">
+          <h5 class="card-title"><strong> <%= @report.report_type %> <%= @report.species %></strong></h5>
+          <p class="card-text">Last seen: <%= truncate(@report.address, :length => 30) %></p>
+          <p class="card-text"><strong><%= @report.date_spotted %></strong></p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="wrapper m-3">
   <div class="container">
     <h2>Potential Matches</h2>
+    <% count = 0 %>
+    <% @nearby.each do |poster| %>
+    <%# check for all posters nearby %>
+      <% if !poster.latitude.nil? || !poster.latitude.nil?  %>
+        <%# show posters with same color and species %>
+        <% if @report.color == poster.pet.color && @report.species == poster.pet.species %>
+          <% count =+ 1 %>
+          <div class="d-flex justify-content-center">
+            <div class="card border-primary border-2" style="width: 65%; border-radius: 20px;">
+              <% photo_url = poster.pet.photos[0].key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(poster.pet.photos[0].key) %>
+              <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 175px; object-fit: cover; border-radius: 17px;" alt="Pet photo">
+              <div class="card-body text-center">
+                <h5 class="card-title"><strong><%= poster.pet.name %></strong></h5>
+                <p class="card-text">Last seen: <%= poster.address %></p>
+                <p class="card-text"><strong><%= poster.date_missing %></strong></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+
+    <%# if none, show "No potential matches. Thank you for reporting!" %>
+    <% if count == 0 %>
+      <p>No matches found. Thank you for reporting this lost pet! </p>
+    <% end %>
   </div>
 </div>
 
-<div class="wrapper m-3">
+<%# <div class="wrapper m-3">
   <div class="container">
     <h2>Recently Found Pets</h2>
   </div>
-</div>
+</div> %>
