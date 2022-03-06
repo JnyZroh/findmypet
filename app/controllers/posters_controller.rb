@@ -27,7 +27,9 @@ class PostersController < ApplicationController
     [{
       lat: @poster.latitude,
       lng: @poster.longitude
-    }]
+      #info_window: render_to_string(partial: "info_window", locals: { poster: @poster })
+      image_url: helpers.asset_url("peticon.png")
+      }]
     # #@markers = @poster.geocoded.map do |poster|
     #   {
     #     lat: poster.latitude,
