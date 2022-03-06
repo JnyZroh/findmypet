@@ -1,7 +1,11 @@
-import { Controller } from "stimulus"
+import { Controller } from "@hotwired/stimulus"
+import mapboxgl from "mapbox-gl"
+import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
+import flatpickr from "flatpickr";
 
 export default class extends Controller {
-  static targets = [ "species", "breed"]
+  static values = { apiKey: String }
+  static targets = ["species", "breed", "address"]
 
   initialize() {
     this.dogBreeds = '<option value="mixed">Mixed</option>\
@@ -14,8 +18,18 @@ export default class extends Controller {
   }
 
   connect() {
-    console.log(this.speciesTarget);
-    console.log(this.breedTarget);
+    flatpickr(".datepicker", {
+      maxDate: "today"
+    });
+
+    this.geocoder = new MapboxGeocoder({
+      accessToken: this.apiKeyValue,
+      types: "country,region,place,postcode,locality,neighborhood,address"
+    });
+    this.geocoder.addTo(this.element)
+
+    this.geocoder.on("result", event => this.#setInputValue(event))
+    this.geocoder.on("clear", () => this.#clearInputValue())
   }
 
   update() {
@@ -32,5 +46,13 @@ export default class extends Controller {
     }
 
     console.log(this.speciesTarget.value);
+  }
+
+  #setInputValue(event) {
+    this.addressTarget.value = event.result["place_name"]
+  }
+
+  #clearInputValue() {
+    this.addressTarget.value = ""
   }
 }
