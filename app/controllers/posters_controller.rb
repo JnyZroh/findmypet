@@ -23,7 +23,7 @@ class PostersController < ApplicationController
 
   def show
     @poster = Poster.find(params[:id])
-
+    
     @markers =
     [{
       lat: @poster.latitude,
@@ -35,7 +35,7 @@ class PostersController < ApplicationController
     #     lng: poster.longitude
     #   }
     # end
-
+    
     respond_to do |format|
       format.html
       format.pdf do
