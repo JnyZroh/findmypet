@@ -1,18 +1,35 @@
-<div class="container">
-  <h1>Edit Pet Poster</h1>
+<div class="container" data-controller="poster-form">
+  <h1 class="form-labels text-center mt-3">Edit Poster Info</h1>
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <%= simple_form_for @poster do |p| %>
+        <%= p.simple_fields_for :pet do |f| %>
+          <%= f.input :name, input_html: {class: "mapboxgl-ctrl-geocoder"}, label_html: {class: "h3 form-labels"}, placeholder: 'Pet Name'%>
+          <%= p.input :date_missing, as: :string, input_html: {class: "datepicker mapboxgl-ctrl-geocoder"}, label_html: {class: "h3 form-labels"} %>
+          <%= p.input :address, input_html: {class: "mapboxgl-ctrl-geocoder"}, label_html: {class: "h3 form-labels"}, required: false %>
+          <%= f.input :species, label: 'Features', as: :select, collection: ['Dog', 'Cat'], prompt: 'Species', input_html: { data: {
+            poster_form_target: "species",
+            action: 'change->poster-form#update'
+          }, class: "mapboxgl-ctrl-geocoder"}, label_html: {class: "h3 form-labels"} %>
+          <%= f.input :breed, label: false, as: :select, collection: [], prompt: 'Breed', input_html: { data: {
+            poster_form_target: "breed"
+          }, class: "mapboxgl-ctrl-geocoder"} %>
+          <%= f.input :color, label: false, as: :select, collection: ['Black', 'Brown', 'White', 'Gray', 'Red', 'Multi-Colored'], prompt: 'Color', input_html: {class: "mapboxgl-ctrl-geocoder"} %>
+          <%= p.input :comment, input_html: {class: "mapboxgl-ctrl-geocoder"}, label_html: {class: "h3 form-labels"} %>
+          <%#= f.input :photos, as: :file, input_html: { multiple: true } %>
+        <% end %>
 
-  <%= simple_form_for @poster do |p| %>
-    <%= p.simple_fields_for :pet do |f| %>
-      <%= f.input :name %>
-      <%= p.input :date_missing, as: :date %>
-      <%= p.input :address %>
-      <%= f.input :species, label: 'Features', as: :select, collection: ['Dog', 'Cat'], prompt: 'Species' %>
-      <%= f.input :breed, label: false, as: :select, collection: ['Husky', 'Scotish Fold'], prompt: 'Breed' %>
-      <%= f.input :color, label: false, as: :select, collection: ['Yellow', 'Blue'], prompt: 'Color' %>
-      <%= p.input :comment %>
-      <%#= f.input :photos, as: :file, input_html: { multiple: true } %>
-    <% end %>
-
-    <%= p.submit 'Update', class: 'btn btn-success' %>
-  <% end %>
+        <div class="row">
+          <div class="col-6 d-flex justify-content-start">
+            <%= link_to "Cancel", root_path, class:"btn btn-lg", style:"background-color: #616161; color: white; border-radius: 10px;" %>
+          </div>
+          <div class="col-6 d-flex justify-content-end">
+            <%= p.submit 'Update', class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-1"></div>
+  </div>
 </div>

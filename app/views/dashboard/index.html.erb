@@ -39,10 +39,13 @@
     </div>
   </div>
 
+
   <h3>My Posters</h3>
   <% @pets.each do |pet| %>
     <% if pet.posters.any? %>
       <% pet.posters.each do |poster| %>
+        <p><%= link_to "Print", poster_path(poster.id) %></p>
+
         <div style="background-color: white; border-radius: 10px; padding:0px;">
           <div class="row">
             <div class="col-6">
