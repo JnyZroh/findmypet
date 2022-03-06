@@ -18,6 +18,8 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
+    @posters = Poster.all
+    @nearby = Poster.near([@report.latitude, @report.longitude], 2, :units => :km, :order => :distance)
   end
 
   def edit
@@ -29,7 +31,7 @@ class ReportsController < ApplicationController
   private
 
   def report_params
-    params.require(:report).permit(:report_type, :species, :date_spotted, :address, :description, photos: [])
+    params.require(:report).permit(:report_type, :species, :color, :date_spotted, :address, :description, photos: [])
   end
 
 end
