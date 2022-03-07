@@ -1,4 +1,17 @@
+#geocoder {
+  z-index: 100;
+}
+
 .mapboxgl-ctrl-geocoder {
+  max-width: none;
+  width: 100%;
+  border: 1px solid black;
+  box-shadow: none;
+  height: 50px;
+}
+
+.form-buttons {
+  background-color: white;
   max-width: none;
   width: 100%;
   border: 1px solid black;
@@ -9,4 +22,12 @@
 .form-labels {
   color: #046E8F;
   font-weight: bold;
+}
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
 }
