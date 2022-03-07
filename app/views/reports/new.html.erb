@@ -1,16 +1,19 @@
-
-<div class="wrapper m-3">
-  <div class="container">
-    <h1>Spotted Pet Info</h1>
-    <%= simple_form_for(@report) do |f| %>
-      <%= f.input :report_type, :collection => %w[Loose Caught], default: 'Loose' %>
-      <%= f.input :species, :collection => %w[Dog Cat] %>
-      <%= f.input :color, :collection => ['Black', 'Brown', 'White', 'Gray', 'Red', 'Multi-Colored'] %>
-      <%= f.input :date_spotted %>
-      <%= f.input :address %>
-      <%= f.input :description %>
-      <%= f.input :photos, as: :file, input_html: { multiple: true } %>
-      <%= f.submit 'Submit Report' %>
-    <% end %>
+<div class="container" data-controller="poster-form">
+  <h1 class="form-labels text-center mt-3" style="color: #046E8F">Spotted Poster Info</h1>
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+      <%= simple_form_for(@report) do |f| %>
+        <%= f.input :report_type, :collection => %w[Loose Caught], default: 'Loose', class: "h3 form-text-label "%>
+        <%= f.input :species, :collection => %w[Dog Cat] %>
+        <%= f.input :color, :collection => ['Black', 'Brown', 'Beige', 'White', 'Gray', 'Red', 'Multi-Colored'] %>
+        <%= f.input :date_spotted %>
+        <%= f.input :address %>
+        <%= f.input :description %>
+        <%= f.input :photos, as: :file, input_html: { multiple: true, style:'outline: 2px dashed black; background-color: white; outline-offset: -2px;'} %>
+        <%= f.submit 'Submit Report', class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
+      <% end %>
+    </div>
+    <div class="col-1"></div>
   </div>
 </div>
