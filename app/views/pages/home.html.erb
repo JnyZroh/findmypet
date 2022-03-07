@@ -67,7 +67,7 @@
     <h3 style="color: white; font-weight:bold;">Missing Pets Near You</h3>
 
     <% if @posters.any? %>
-      <div class="row row-cols-2 row-cols-md-4 gy-3">
+      <div class="row row-cols-2 row-cols-md-4 gy-3 m-0">
         <% @posters.each do |poster| %>
           <% if poster.pet.user != current_user %>
             <div class="col mb-2">
