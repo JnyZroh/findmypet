@@ -12,7 +12,7 @@ export default class extends Controller {
 
     this.map = new mapboxgl.Map({
       container: this.element,
-      style: "mapbox://styles/mapbox/streets-v10"
+      style: "mapbox://styles/dangne/cl0h23ek0000l14qvlwbirb0e"
     });
     this._addMarkersToMap();
     this._fitMapToMarkers();
@@ -25,8 +25,8 @@ export default class extends Controller {
       customMarker.className = "marker"
       customMarker.style.backgroundImage = `url('${marker.image_url}')`
       customMarker.style.backgroundSize = "contain"
-      customMarker.style.width = "35px"
-      customMarker.style.height = "35px"
+      customMarker.style.width = "40px"
+      customMarker.style.height = "40px"
 
       new mapboxgl.Marker(customMarker)
         .setLngLat([ marker.lng, marker.lat ])
