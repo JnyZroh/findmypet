@@ -4,7 +4,8 @@ import mapboxgl from "mapbox-gl";
 export default class extends Controller {
   static values = {
     apiKey: String,
-    markers: Array
+    markers_report: Array,
+    markers_posters: Array
   }
 
   connect() {

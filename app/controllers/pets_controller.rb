@@ -1,4 +1,27 @@
 class PetsController < ApplicationController
+  def index
+    @reports = Report.all
+    @markers = []
+
+    @reports.each do |report|
+      @markers << {
+        lat: report.latitude,
+        lng: report.longitude,
+        image_url: helpers.asset_url("peticon.png")
+      }
+    end
+
+    @posters = Poster.all
+
+    @posters.each do |poster|
+      @markers << {
+        lat: poster.latitude,
+        lng: poster.longitude,
+        image_url: helpers.asset_url("peticon.png")
+      }
+    end
+  end
+
   def new
   end
 
