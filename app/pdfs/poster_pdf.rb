@@ -11,16 +11,15 @@ class PosterPdf < Prawn::Document
   end
 
   def header
-
     text "Missing #{@poster.pet.species.capitalize}: #{@poster.pet.name.capitalize}",
     size: 36, style: :bold,  align: :center
-    # date_obj = DateTime.strptime(@poster.date_missing,'%Y-%m-%d %H:%M:%S%Z')
-    # format   = date_obj.strftime('%Y-%m-%dT%H:%M:%S.%LZ')
+
     move_down 5
     i = @poster.address.index(',')-1
     address = @poster.address[0..i]
     text "#{@poster.pet.color.capitalize} #{@poster.pet.breed}, last seen near #{address}",
       size: 18, align: :center
+
     move_down 5
     text "Missing since #{@poster.date_missing.strftime("%A, %B %d, %Y")}",
     size: 18, align: :center

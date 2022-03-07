@@ -1,2 +1,30 @@
-<h1>Posters#print</h1>
-<p>Find me in app/views/posters/print.html.erb</p>
+<h1>Confirm and Print Poster</h1>
+
+  <div class="d-flex justify-content-center">
+    <div class="card border-primary border-2" style="width: 75%; border-radius: 20px; text-align:center">
+      <% photo_url = @poster.pet.photos[0].key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(@poster.pet.photos[0].key) %>
+      <h2 style="font-weight:bold; margin: 10px">Missing <%= @poster.pet.species.capitalize %>: <%= @poster.pet.name.capitalize %></h2>
+      <% i = @poster.address.index(',')-1 %>
+      <% address = @poster.address[0..i] %>
+      <p style="font-size:13px; margin: 5px 10px 15px 10px">Red Husky, last seen near <%= address %><br>Missing since <%= @poster.date_missing.strftime("%A, %B %d, %Y") %></p>
+      <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 200px; width: 65%; margin:0 auto; object-fit: cover;" alt="Pet photo">
+      <div class="card-body text-center">
+        <p class="card-text" style="font-size:13px; margin: 5px 10px"><%= @poster.comment %></p>
+        <p class="card-text" style="font-weight: bold">Contact <%= @poster.pet.user.first_name %> <%= @poster.pet.user.last_name %> at <%= @poster.pet.user.phone_number %></p>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center; margin: 15px 30px">
+    <p>Please verify that your information is correct before printing.</p>
+  </div>
+
+<div class="container">
+ <div class="row justify-content-around">
+    <div class="col-6 text-center ">
+      <%= link_to "Back", root_path, class:"btn btn-lg", style:"background-color: #616161; color: white; border-radius: 10px;" %>
+    </div>
+    <div class="col-6 text-center">
+      <%= link_to 'Print', print_poster_path(@poster, format: 'pdf'), class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
+    </div>
+  </div>
+</div>
