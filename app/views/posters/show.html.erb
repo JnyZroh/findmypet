@@ -62,3 +62,11 @@
   data-controller="mapbox"
   data-mapbox-markers-value="<%= @markers.to_json %>"
   data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+
+<div class="row">
+  <div class="col-6 d-flex justify-content-start">
+    <%= link_to "Back", root_path, class:"btn btn-lg", style:"background-color: #616161; color: white; border-radius: 10px;" %>
+  </div>
+  <div class="col-6 d-flex justify-content-end">
+  </div>
+</div>
