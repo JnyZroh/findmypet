@@ -2,12 +2,17 @@ import { Controller } from "@hotwired/stimulus"
 import mapboxgl from "mapbox-gl"
 import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder"
 import flatpickr from "flatpickr";
+import dotenv from "dotenv";
 
 export default class extends Controller {
   static values = { apiKey: String }
   static targets = ["species", "breed", "address"]
 
   initialize() {
+    dotenv.config();
+
+    this.apiKey = "pk.eyJ1IjoiZGFuZ25lIiwiYSI6ImNrejh3emM4NjFwMnUydm54MjB0dGxzazIifQ.G8jnQ0-A61rNSRWICxflTw";
+
     this.dogBreeds = '<option value="mixed">Mixed</option>\
                       <option value="husky">Husky</option>\
                       <option value="labrador">Labrador</option>';
@@ -18,22 +23,29 @@ export default class extends Controller {
   }
 
   connect() {
+    this.geocoderLoader()
+
+    this.pickerLoader()
+
     if (this.speciesTarget.value === "Dog") {
       this.breedTarget.innerHTML = this.dogBreeds;
     }else if (this.speciesTarget.value === "Cat") {
       this.breedTarget.innerHTML = this.catBreeds;
     }
+  }
 
+  pickerLoader() {
     flatpickr(".datepicker", {
       maxDate: "today"
     });
+  }
 
+  geocoderLoader() {
     this.geocoder = new MapboxGeocoder({
-      accessToken: this.apiKeyValue,
+      accessToken: this.addressTarget.dataset.posterFormApiKeyValue,
       types: "country,region,place,postcode,locality,neighborhood,address"
     });
-    this.geocoder.addTo(this.element)
-
+    this.geocoder.addTo(this.addressTarget)
     this.geocoder.on("result", event => this.#setInputValue(event))
     this.geocoder.on("clear", () => this.#clearInputValue())
   }
@@ -50,8 +62,6 @@ export default class extends Controller {
     }else if (this.speciesTarget.value === "Cat") {
       this.breedTarget.innerHTML = this.catBreeds;
     }
-
-    console.log(this.speciesTarget.value);
   }
 
   #setInputValue(event) {
