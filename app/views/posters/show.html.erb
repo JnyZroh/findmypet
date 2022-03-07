@@ -41,8 +41,12 @@
   <li class="list-group-item"><p>Breed : <%= @poster.pet.breed %></p></li>
   <li class="list-group-item"><p>Color : <%= @poster.pet.color %></p></li>
 </ul>
+
+<p><%= link_to "Print Your Poster (PDF)", poster_path(@poster, format: 'pdf') %></p>
+
 <h2>Description</h2>
 <li class="list-group-item"><p><%= @poster.comment %></p></li>
+
 
 <!--
 <div class="card-product">

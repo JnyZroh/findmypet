@@ -5,19 +5,21 @@
     <div class="col-10">
       <%= simple_form_for @pet do |f| %>
         <%= f.simple_fields_for :posters do |p| %>
-          <%= f.input :name, input_html: {class: "mapboxgl-ctrl-geocoder"}, label_html: {class: "h3 form-labels"}, placeholder: 'Pet Name' %>
-          <%= p.input :date_missing, as: :string, input_html: {class: "datepicker mapboxgl-ctrl-geocoder"}, label_html: {class: "h3 form-labels"}  %>
-          <%= p.input :address, input_html: { data: { poster_form_target: "address" }, class: "d-none" },
-                              wrapper_html: { data: { controller: "poster-form", poster_form_api_key_value: ENV['MAPBOX_API_KEY'] }},
-                                label_html: {class: "h3 form-labels"}, required: false %>
+          <%= f.input :name, input_html: {class: "form-buttons"}, label_html: {class: "h3 form-labels"}, placeholder: 'Pet Name' %>
+          <%= p.input :date_missing, as: :string, input_html: {class: "datepicker form-buttons"}, label_html: {class: "h3 form-labels"}  %>
+          <%= p.input :address,
+            wrapper_html: { data: { poster_form_api_key_value: ENV['MAPBOX_API_KEY'], poster_form_target: "address" }},
+            input_html: { data: {  }, class: "d-none" },
+            label_html: { class: "h3 form-labels"}, required: false
+          %>
           <%= f.input :species, label: 'Features', as: :select, collection: ['Dog', 'Cat'], prompt: 'Species', input_html: { data: {
             poster_form_target: "species",
             action: 'change->poster-form#update'
-          }, class: "mapboxgl-ctrl-geocoder"}, label_html: {class: "h3 form-labels"} %>
+          }, class: "form-buttons"}, label_html: {class: "h3 form-labels"} %>
           <%= f.input :breed, label: false, as: :select, collection: [], prompt: 'Breed', input_html: { data: {
             poster_form_target: "breed"
-          }, class: "mapboxgl-ctrl-geocoder"}, disabled: true %>
-          <%= f.input :color, label: false, as: :select, collection: ['Black', 'Brown', 'White', 'Gray', 'Red', 'Multi-Colored'], prompt: 'Color', input_html: {class: "mapboxgl-ctrl-geocoder"} %>
+          }, class: "form-buttons"}, disabled: true %>
+          <%= f.input :color, label: false, as: :select, collection: ['Black', 'Brown', 'White', 'Gray', 'Red', 'Multi-Colored'], prompt: 'Color', input_html: {class: "form-buttons"} %>
           <%= f.input :photos, as: :file, input_html: { multiple: true, style:'outline: 2px dashed black; background-color: white; outline-offset: -2px;' }, label_html: {class: "h3 form-labels"} %>
         <% end %>
 

@@ -1,7 +1,19 @@
 .banner {
+  position: relative;
+  height:35vw;
+  min-height: 35vh;
   background-size: cover;
   background-position: center;
-  padding: 100px 0;
+  padding: 50px 0 120px 0;
+  background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.squarespace-cdn.com/content/v1/5e498ce4647539551e1cd2fa/1602283258952-QRUJHVS3NLA7C32PA5RM/Man+Hugging+Dog+eric-ward-ISg37AI2A-s-unsplash.jpg);
+
+  img {
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    object-fit: cover;
+    width: 100%;
+  }
 }
 
 .banner h1 {
