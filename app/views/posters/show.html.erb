@@ -33,44 +33,49 @@
   </button>
 </div>
 
-<h1><%= @poster.pet.name %></h1>
-
-<ul class="list-group d-flex flex-column mt-3">
-  <li class="list-group-item"><p>Last seen : <%= @poster.date_missing %></li>
-  <li class="list-group-item"><p>Species : <%= @poster.pet.species %></p></li>
-  <li class="list-group-item"><p>Breed : <%= @poster.pet.breed %></p></li>
-  <li class="list-group-item"><p>Color : <%= @poster.pet.color %></p></li>
-</ul>
-
-<p><%= link_to "Print Your Poster (PDF)", poster_path(@poster, format: 'pdf') %></p>
-
-<h2>Description</h2>
-<li class="list-group-item"><p><%= @poster.comment %></p></li>
+<div class="container">
 
 
-<!--
-<div class="card-product">
-  <div class="card-product-infos">
-    <div class="posterinfo-container d-flex flex-column align-items-center">
-      <h1><%= @poster.pet.name %></h1>
-      <p>Last seen : <%= @poster.date_missing %>
-      <p>Species : <%= @poster.pet.species %></p>
-      <p>Breed : <%= @poster.pet.breed %></p>
-      <p>Color : <%= @poster.pet.color %></p>
-      <p>Description : <%= @poster.pet.description %></p>
+  <h1><%= @poster.pet.name %></h1>
+
+  <ul class="list-group d-flex flex-column mt-3">
+    <li class="list-group-item"><p>Last seen : <%= @poster.date_missing %></li>
+    <li class="list-group-item"><p>Species : <%= @poster.pet.species %></p></li>
+    <li class="list-group-item"><p>Breed : <%= @poster.pet.breed %></p></li>
+    <li class="list-group-item"><p>Color : <%= @poster.pet.color %></p></li>
+  </ul>
+
+  <p><%= link_to "Print Your Poster (PDF)", poster_path(@poster, format: 'pdf') %></p>
+
+  <h2>Description</h2>
+  <li class="list-group-item"><p><%= @poster.comment %></p></li>
+
+
+  <!--
+  <div class="card-product">
+    <div class="card-product-infos">
+      <div class="posterinfo-container d-flex flex-column align-items-center">
+        <h1><%= @poster.pet.name %></h1>
+        <p>Last seen : <%= @poster.date_missing %>
+        <p>Species : <%= @poster.pet.species %></p>
+        <p>Breed : <%= @poster.pet.breed %></p>
+        <p>Color : <%= @poster.pet.color %></p>
+        <p>Description : <%= @poster.pet.description %></p>
+      </div>
     </div>
   </div>
-</div>
--->
-<div style="width: 100%; height: 200px;"
-  data-controller="mapbox"
-  data-mapbox-markers-value="<%= @markers.to_json %>"
-  data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+  -->
+  <div style="width: 100%; height: 200px;"
+    data-controller="mapbox"
+    data-mapbox-markers-value="<%= @markers.to_json %>"
+    data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
-<div class="row">
-  <div class="col-6 d-flex justify-content-start">
-    <%= link_to "Back", root_path, class:"btn btn-lg", style:"background-color: #616161; color: white; border-radius: 10px;" %>
-  </div>
-  <div class="col-6 d-flex justify-content-end">
+  <div class="row m-3">
+    <div class="col-6 d-flex justify-content-start">
+      <%= link_to "Back", root_path, class:"btn btn-lg", style:"background-color: #616161; color: white; border-radius: 10px;" %>
+    </div>
+    <div class="col-6 d-flex justify-content-end">
+        <%= link_to "Print", root_path, class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
+    </div>
   </div>
 </div>
