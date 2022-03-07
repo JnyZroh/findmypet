@@ -1,7 +1,9 @@
-<h1>Confirm and Print Poster</h1>
-
-  <div class="d-flex justify-content-center">
-    <div class="card border-primary border-2" style="width: 75%; border-radius: 20px; text-align:center">
+<h1 class="m-3 text-center">Confirm and Print Poster</h1>
+  <div style="text-align:center; margin: 15px 30px">
+    <p>Please verify that the information below is correct before printing.</p>
+  </div>
+  <div class="d-flex justify-content-center mb-4">
+    <div class="card border-2" style="width: 75%; border-radius: 20px; text-align:center">
       <% photo_url = @poster.pet.photos[0].key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(@poster.pet.photos[0].key) %>
       <h2 style="font-weight:bold; margin: 10px">Missing <%= @poster.pet.species.capitalize %>: <%= @poster.pet.name.capitalize %></h2>
       <% i = @poster.address.index(',')-1 %>
@@ -14,17 +16,14 @@
       </div>
     </div>
   </div>
-  <div style="text-align:center; margin: 15px 30px">
-    <p>Please verify that your information is correct before printing.</p>
-  </div>
 
-<div class="container">
- <div class="row justify-content-around">
+<div class="container my-3">
+ <div class="row justify-content-between">
     <div class="col-6 text-center ">
-      <%= link_to "Back", root_path, class:"btn btn-lg", style:"background-color: #616161; color: white; border-radius: 10px;" %>
+      <%= link_to "Edit", edit_poster_path(@poster), class:"col-8 btn btn-lg", style:"background-color: #616161; color: white; border-radius: 10px;" %>
     </div>
     <div class="col-6 text-center">
-      <%= link_to 'Print', print_poster_path(@poster, format: 'pdf'), class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
+      <%= link_to 'Print', print_poster_path(@poster, format: 'pdf'), class:"col-8 btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
     </div>
   </div>
 </div>
