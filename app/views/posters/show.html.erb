@@ -45,8 +45,6 @@
     <li class="list-group-item"><p>Color : <%= @poster.pet.color %></p></li>
   </ul>
 
-  <p><%= link_to "Print Your Poster (PDF)", poster_path(@poster, format: 'pdf') %></p>
-
   <h2>Description</h2>
   <li class="list-group-item"><p><%= @poster.comment %></p></li>
 
@@ -75,7 +73,7 @@
       <%= link_to "Home", root_path, class:"btn btn-lg", style:"background-color: #616161; color: white; border-radius: 10px;" %>
     </div>
     <div class="col-6 d-flex justify-content-end">
-        <%= link_to "Print", root_path, class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
+        <%= link_to "Print", print_poster_path(@poster), class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
     </div>
   </div>
 </div>
