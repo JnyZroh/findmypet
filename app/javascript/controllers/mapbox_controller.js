@@ -4,8 +4,10 @@ import mapboxgl from "mapbox-gl";
 export default class extends Controller {
   static values = {
     apiKey: String,
-    markers: Array
+    markers: Array,
+    mapId: Number
   }
+
 
   connect() {
     mapboxgl.accessToken = this.apiKeyValue;
@@ -16,6 +18,39 @@ export default class extends Controller {
     });
     this._addMarkersToMap();
     this._fitMapToMarkers();
+
+    if (this.mapIdValue == 99) {
+      console.log(this.markersValue[0])
+
+      const center = [this.markersValue[0].lng, this.markersValue[0].lat];
+      const radius = 1;
+      const options = {
+        steps: 20,
+        units: "kilometers",
+      };
+
+
+      const circle = turf.circle(center, radius, options);
+
+      this.map.on('load', () => {
+
+        this.map.addSource("circleData", {
+          type: "geojson",
+          data: circle
+        });
+
+        this.map.addLayer({
+          id: "circle-fill",
+          type: "fill",
+          source: "circleData",
+          paint: {
+            "fill-color": "yellow",
+            "fill-opacity": 0.2
+          }
+        });
+
+      });
+    }
   }
   _addMarkersToMap() {
     this.markersValue.forEach((marker) => {
@@ -37,6 +72,6 @@ export default class extends Controller {
   _fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
     this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
-    this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 2000 })
+    this.map.fitBounds(bounds, { padding: 70, maxZoom: this.mapIdValue == 99 ? 12.5 : 15, duration: 2000 })
   }
 }
