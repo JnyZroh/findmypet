@@ -2,6 +2,8 @@ Report.destroy_all
 Poster.destroy_all
 Pet.destroy_all
 User.destroy_all
+Message.destroy_all
+Chatroom.destroy_all
 
 user1 = User.create!(first_name: "Stephane", last_name: "LaFontaine", phone_number: "514-123-4567", email: "steph@lf.ca", password: "mypassword", address: '5333 Avenue Casgrain Suite 102, Montréal QC' )
 file1 = URI.open('https://avatars.githubusercontent.com/u/37821714?v=4')
@@ -34,3 +36,5 @@ poster3 = Poster.create!(date_missing: Date.new(2022,3,2), date_found: nil, foun
 poster4 = Poster.create!(date_missing: Date.new(2022,3,3), date_found: nil, found: false, comment: "Friendly but timid. And he will bite but he's small so it won't hurt!", reward: 50, radius: 2, address: '158 Rue Saint- Viateur O, Montréal, QC H2T 2L4', pet: pet4 )
 
 report1 = Report.create!(date_spotted: Date.new(2022,3,3), address: "15 Saint-viateur Rue E, Montral QC H2T 1A5", species: "dog", description: "Looks like a red Husky with white ears.", report_type: nil, user: user2)
+
+chatroom1 = Chatroom.create!(user_one: user1, user_two: user2);
