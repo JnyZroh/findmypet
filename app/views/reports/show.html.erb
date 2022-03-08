@@ -1,9 +1,11 @@
 <div class="wrapper m-3">
   <div class="container">
-    <h3>Report Submitted!</h3>
+    <div class="text-center mb-3" style="color: #004358;">
+      <h1><strong>Report Submitted!</strong></h1>
+    </div>
 
     <div class="d-flex justify-content-center">
-      <div class="card border-primary border-2" style="width: 65%; border-radius: 20px;">
+      <div class="card border-0" style="width: 65%; border-radius: 20px; max-width: 200px;">
         <% photo_url = @report.photos[0].key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(@report.photos[0].key) %>
         <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 175px; object-fit: cover; border-radius: 17px;" alt="Pet photo">
         <div class="card-body text-center">
@@ -27,7 +29,7 @@
         <% if @report.color == poster.pet.color && @report.species == poster.pet.species %>
           <% count =+ 1 %>
           <div class="d-flex justify-content-center">
-            <div class="card border-primary border-2" style="width: 65%; border-radius: 20px;">
+            <div class="card border-0" style="width: 65%; border-radius: 20px; max-width: 200px;">
               <% photo_url = poster.pet.photos[0].key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(poster.pet.photos[0].key) %>
               <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 175px; object-fit: cover; border-radius: 17px;" alt="Pet photo">
               <div class="card-body text-center">
