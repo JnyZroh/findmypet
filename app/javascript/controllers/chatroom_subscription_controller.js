@@ -28,7 +28,7 @@ export default class extends Controller {
       console.log(data);
       var lines = data.split("\n")
       lines[0] = "  <div>"
-      lines[1] = "    <div class=\"m-1 p-2 gray-bubble\">"
+      lines[1] = "    <div class=\"m-1 p-2 gray-bubble\" style=\"max-width: 400px;\">"
       data = lines.join("\n")
       console.log(data);
     }
