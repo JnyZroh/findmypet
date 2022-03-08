@@ -8,5 +8,8 @@ class User < ApplicationRecord
   has_many :posters, through: :pet
   has_many :reports
 
+  has_many :chatrooms_as_user_one, class_name: "Chatroom", foreign_key: :user_one_id
+  has_many :chatrooms_as_user_two, class_name: "Chatroom", foreign_key: :user_two_id
+
   has_one_attached :photo
 end

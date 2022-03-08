@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   get '/dashboard', to: 'dashboard#index'
+  get '/dashboard/messages', to: 'dashboard#messages'
+
+  resources :chatrooms, only: :show do
+    resources :messages, only: :create
+  end
 
   resources :pets
   get '/my_pets', to: 'pets#my_pets'
