@@ -1,0 +1,76 @@
+<div class="container my-3">
+  <div class="text-center" style="color: #004358">
+    <h1><strong>Confirmation Page</strong></h1>
+    <h3>Your report has been submitted!</p>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <div class="card border-0" style="width: 65%; max-width: 200px; border-radius: 20px;">
+      <% if @report.photos.any? %>
+      <% photo_url = @report.photos.empty? ? '' : cl_image_path(@report.photos[0].key) %>
+      <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 175px; object-fit: cover; border-radius: 17px;" alt="Pet photo">
+      <% end %>
+      <div class="card-body text-center">
+        <h5 class="card-title"><strong> <%= @report.report_type %> <%= @report.species %></strong></h5>
+        <p class="card-text">Last seen: <%= truncate(@report.address, :length => 30) %></p>
+        <p class="card-text"><strong><%= @report.date_spotted %></strong></p>
+        <%= link_to "", report_path(@report.id), class:"stretched-link"%>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-3 p-0 text-center">
+    <h2>Potential Matches</h2>
+    <p>If there is a match below, open the poster to contact the owner.</p>
+    <% count = 0 %>
+
+      <div style="width:90vw">
+        <div class="d-flex flex-wrap justify-content-center ">
+          <% @nearby.each do |poster| %>
+          <%# check for all posters nearby %>
+            <% if !poster.latitude.nil? || !poster.latitude.nil?  %>
+              <%# show posters with same color and species %>
+              <% if @report.color == poster.pet.color && @report.species == poster.pet.species %>
+                <% count =+ 1 %>
+
+                <div class="card border-0 mx-2" style="width: 50%; border-radius: 20px; max-width:150px">
+                  <% photo_url = poster.pet.photos.empty? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(poster.pet.photos[0].key) %>
+                  <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 125px; object-fit: cover; border-radius: 17px;" alt="Pet photo">
+                  <div class="card-body text-center" style="height: 100px;">
+                    <h5 class="card-title"><strong><%= poster.pet.name %></strong></h5>
+                    <p class="card-text"><%= truncate(poster.address, :length => 15) %></p>
+                    <p class="card-text"><strong><%= poster.date_missing %></strong></p>
+                    <%= link_to "", poster_path(poster.id), class:"stretched-link"%>
+                  </div>
+                </div>
+
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+
+
+    <%# if none, show "No potential matches. Thank you for reporting!" %>
+     <% if count == 0 %>
+      <p>No matches found. Thank you for reporting this lost pet! </p>
+
+    <% end %>
+  </div>
+
+  <div class="row m-3">
+    <div class="col-6 d-flex justify-content-start">
+      <%= link_to "Home", root_path, class:"btn btn-lg", style:"background-color: #616161; color: white; border-radius: 10px;" %>
+    </div>
+    <div class="col-6 d-flex justify-content-end">
+        <%= link_to "View all", pets_path, class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
+    </div>
+  </div>
+
+</div>
+
+<%# <div class="wrapper m-3">
+  <div class="container">
+    <h2>Recently Found Pets</h2>
+  </div>
+</div> %>

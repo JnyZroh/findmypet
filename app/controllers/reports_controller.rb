@@ -7,7 +7,9 @@ class ReportsController < ApplicationController
     @report = Report.new(report_params)
     @report.user = current_user
     if @report.save!
-      redirect_to report_path(@report)
+      @report.address = @report.address.gsub(/ \w\d\w \d\w\d,/, "")
+      @report.save
+      redirect_to report_confirm_path(@report)
     else
       render :new
     end
@@ -18,14 +20,18 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
-    @posters = Poster.all
-    @nearby = Poster.near([@report.latitude, @report.longitude], 2, :units => :km, :order => :distance)
   end
 
   def edit
   end
 
   def update
+  end
+
+  def confirm
+    @report = Report.find(params[:report_id])
+    @posters = Poster.all
+    @nearby = Poster.near([@report.latitude, @report.longitude], 2, :units => :km, :order => :distance)
   end
 
   private
