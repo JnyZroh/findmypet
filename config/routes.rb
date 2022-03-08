@@ -19,5 +19,7 @@ Rails.application.routes.draw do
   get 'posters/:poster_id/print', to: 'posters#print', as: 'print_poster'
   get 'posters/:poster_id/found', to: 'posters#mark_as_found'
 
-  resources :reports, except: %i[destroy]
+  resources :reports, except: %i[destroy] do
+    get 'confirm', to: :confirm
+  end
 end
