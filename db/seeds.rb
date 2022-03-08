@@ -1,9 +1,9 @@
 Report.destroy_all
 Poster.destroy_all
 Pet.destroy_all
-User.destroy_all
 Message.destroy_all
 Chatroom.destroy_all
+User.destroy_all
 
 user1 = User.create!(first_name: "Stephane", last_name: "LaFontaine", phone_number: "514-123-4567", email: "steph@lf.ca", password: "mypassword", address: '5333 Avenue Casgrain Suite 102, Montréal QC' )
 file1 = URI.open('https://avatars.githubusercontent.com/u/37821714?v=4')

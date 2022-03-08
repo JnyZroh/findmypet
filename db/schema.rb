@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 2022_03_07_194458) do
   end
 
   create_table "chatrooms", force: :cascade do |t|
-    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_one_id"
