@@ -7,6 +7,7 @@ class PetsController < ApplicationController
       @markers << {
         lat: report.latitude,
         lng: report.longitude,
+        #info_window: render_to_string(partial: "info_window_report", locals: { report: report }),
         image_url: helpers.asset_url("peticon.png")
       }
     end
@@ -17,6 +18,7 @@ class PetsController < ApplicationController
       @markers << {
         lat: poster.latitude,
         lng: poster.longitude,
+        info_window: render_to_string(partial: "info_window_poster", locals: { poster: poster }),
         image_url: helpers.asset_url("peticon.png")
       }
     end
