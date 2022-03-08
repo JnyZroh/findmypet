@@ -30,11 +30,11 @@ pet4 = Pet.create!(name: "Bully", species: "cat", breed: "Mixed", color: "gray",
 pet4.photos.attach(io: File.open(Rails.root.join('app/assets/images/Pet4_Tiger.png')),
                   filename: 'Pet4_Tiger.png')
 
-poster1 = Poster.create!(date_missing: Date.new(2022,3,1), date_found: nil, found: false, comment: "Very friendly, if seen don't hesitate to catch it.", reward: 50, radius: 2, address: '5333 Avenue Casgrain, Montréal QC', pet: pet1 )
-poster2 = Poster.create!(date_missing: Date.new(2022,3,2), date_found: nil, found: false, comment: "A bit nervous so please approach him slowly. Lure with food, if possible.", reward: 50, radius: 2, address: '23 Rue Bernard O, Montréal, QC H2T 2J6', pet: pet2 )
-poster3 = Poster.create!(date_missing: Date.new(2022,3,2), date_found: nil, found: false, comment: "He still has his leash attached. It's a yellow and blue leash ", reward: 50, radius: 2, address: '74 Av. Fairmount O, Montréal, QC H2T 2M2', pet: pet3 )
-poster4 = Poster.create!(date_missing: Date.new(2022,3,3), date_found: nil, found: false, comment: "Friendly but timid. And he will bite but he's small so it won't hurt!", reward: 50, radius: 2, address: '158 Rue Saint- Viateur O, Montréal, QC H2T 2L4', pet: pet4 )
+poster1 = Poster.create!(date_missing: Date.new(2022,3,1), date_found: nil, found: false, comment: "Very friendly, if seen don't hesitate to catch it.", reward: 50, radius: 2, address: '5200 Avenue Casgrain, Montréal QC', pet: pet1, latitude: 45.5251471, longitude: -73.593808)
+poster2 = Poster.create!(date_missing: Date.new(2022,3,2), date_found: nil, found: false, comment: "A bit nervous so please approach him slowly. Lure with food, if possible.", reward: 50, radius: 2, address: '23 Rue Bernard O, Montréal, QC', pet: pet2, latitude: 45.4382291, longitude: -73.6277107 )
+poster3 = Poster.create!(date_missing: Date.new(2022,3,2), date_found: nil, found: false, comment: "He still has his leash attached. It's a yellow and blue leash ", reward: 50, radius: 2, address: '74 Avenue Fairmount O, Montréal, QC', pet: pet3, latitude: 45.5185492, longitude: -73.5992163 )
+poster4 = Poster.create!(date_missing: Date.new(2022,3,3), date_found: nil, found: false, comment: "Friendly but timid. And he will bite but he's small so it won't hurt!", reward: 50, radius: 2, address: '158 Rue Saint-Viateur Ouest, Montréal, QC', pet: pet4, latitude: 45.523783, longitude: -73.6006065 )
 
-report1 = Report.create!(date_spotted: Date.new(2022,3,3), address: "15 Saint-viateur Rue E, Montral QC H2T 1A5", species: "dog", description: "Looks like a red Husky with white ears.", report_type: nil, user: user2)
+report1 = Report.create!(date_spotted: Date.new(2022,3,3), address: "15 Rue Saint-Viateur Est, Montreal QC", species: "dog", description: "Looks like a red Husky with white ears.", report_type: nil, user: user2, latitude: 45.52619733557856, longitude: -73.59881346575006)
 
 chatroom1 = Chatroom.create!(user_one: user1, user_two: user2);

@@ -90,20 +90,37 @@
             <br>or call the SPCA at 514-735-2711</p>
           </div>
         </div>
+
+        <div class="my-4" style="padding: 10px;">
+          <h3>Updates</h3>
+          <div class="row">
+
+            <% @nearby = Report.near([poster.latitude, poster.longitude], 2, :units => :km, :order => :distance) %>
+            <% @nearby = @nearby.select {|report| Date.today - report.date_spotted <= 1 } %>
+            <% @nearby = @nearby.select {|report| report.color == poster.pet.color && report.species == poster.pet.species}   %>
+            <% if @nearby.any? %>
+              <div class="updates"> Check these potential matches:</div>
+                <ul>
+                  <% @nearby.each do |report| %>
+                    <% i = report.address.index(',')-1 %>
+                    <% address = report.address[0..i] %>
+                    <li style="padding:0 0 5px 20px; list-style-type: none">
+                      <%= link_to "See report", report_path(report) %> of a <%= report.color %> <%= report.species %> seen near: <%= address %></li>
+                  <% end %>
+                </ul>
+              <% else %>
+                <div class="updates"> No updates yet!</div>
+              <% end %>
+
+          </div>
+          <div class="row">
+              <div class="updates"> Your poster was posted!</div>
+          </div>
+        </div>
+
       <% end %>
     <% end %>
   <% end %>
-
-  <div class="my-4" style="padding: 10px;">
-  <h3>Updates</h3>
-    <div class="row">
-      <% if current_user.reports.any? %>
-        <p>You have updates!</p>
-      <% else %>
-        <p>No updates yet</p>
-      <% end %>
-    </div>
-  </div>
 
 <% if current_user.reports.any? %>
   <h3>My Reports</h3>
