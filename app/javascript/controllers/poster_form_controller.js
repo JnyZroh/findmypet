@@ -65,7 +65,8 @@ export default class extends Controller {
   }
 
   #setInputValue(event) {
-    this.addressTarget.value = event.result["place_name"]
+    // console.log(this.addressTarget.getElementsByTagName('input')[0].value);
+    this.addressTarget.getElementsByTagName('input')[0].value = event.result["place_name"]
   }
 
   #clearInputValue() {

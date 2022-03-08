@@ -15,7 +15,11 @@
         <div class="flex-grow-1">
           <div class="card-body p-2">
             <h5 class="card-title" style="font-size: 18px;"><%= other_user.first_name %></h5>
-            <p class="card-text" style="font-size: 14px;"><%= chatroom.messages.last.content.truncate(35) %></p>
+            <% if chatroom.messages.empty? %>
+              <p class="card-text" style="font-size: 14px;">No messages sent yet.</p>
+            <% else %>
+              <p class="card-text" style="font-size: 14px;"><%= chatroom.messages.last.content.truncate(35) %></p>
+            <% end %>
             <%= link_to "", chatroom_path(chatroom), class:"stretched-link"%>
           </div>
         </div>
