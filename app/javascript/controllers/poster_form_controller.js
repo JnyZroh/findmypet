@@ -43,7 +43,7 @@ export default class extends Controller {
   geocoderLoader() {
     this.geocoder = new MapboxGeocoder({
       accessToken: this.addressTarget.dataset.posterFormApiKeyValue,
-      types: "country,region,place,postcode,locality,neighborhood,address"
+      types: "country,region,place,locality,neighborhood,address"
     });
     this.geocoder.addTo(this.addressTarget)
     this.geocoder.on("result", event => this.#setInputValue(event))
