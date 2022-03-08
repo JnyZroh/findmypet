@@ -38,19 +38,21 @@
   <h1 class="mt-3 text-center"><strong><%= @poster.pet.name %></strong></h1>
 
   <ul class="list-group d-flex flex-column mt-3" style="border-radius:15px">
-    <li class="list-group-item" style="color:#004358"><p><strong>Last seen</strong> : <%= @poster.date_missing %></li>
-    <li class="list-group-item" style="color:#004358"><p><strong>Species</strong> : <%= @poster.pet.species %></p></li>
-    <li class="list-group-item" style="color:#004358"><p><strong>Breed</strong> : <%= @poster.pet.breed %></p></li>
-    <li class="list-group-item" style="color:#004358"><p><strong>Color</strong> : <%= @poster.pet.color %></p></li>
+    <li class="list-group-item d-flex justify-content-between" style="color:#004358; padding-top: 10px; padding-bottom: 10px;"><strong>Last seen</strong> <span><%= @poster.date_missing %></span></li>
+    <li class="list-group-item d-flex justify-content-between" style="color:#004358; padding-top: 10px; padding-bottom: 10px;"><strong>Species</strong> <span><%= @poster.pet.species %></span></li>
+    <li class="list-group-item d-flex justify-content-between" style="color:#004358; padding-top: 10px; padding-bottom: 10px;"><strong>Breed</strong> <span><%= @poster.pet.breed %></span></li>
+    <li class="list-group-item d-flex justify-content-between" style="color:#004358; padding-top: 10px; padding-bottom: 10px;"><strong>Color</strong> <span><%= @poster.pet.color %></span></li>
   </ul>
-  <ul class="list-group d-flex flex-column mt-3 border-0" style="border-radius:15px">
-    <li class="list-group-item" style="color:#004358"><p><strong>Description</strong> : <%= @poster.comment %></p></li>
-  </ul>
-  <h2 class="mt-3">Location lost </h2>
-  <li class="list-group-item" style="color:#004358; border-radius:15px 15px 0 0"><p><%= @poster.address %></p></li>
 
-  <h2>Description</h2>
-  <li class="list-group-item"><p><%= @poster.comment %></p></li>
+  <h2 class="mt-3">Description</h2>
+  <ul class="list-group d-flex flex-column mt-3 border-0" style="border-radius:15px">
+    <li class="list-group-item m-0" style="color:#004358;"><%= @poster.comment %></li>
+  </ul>
+
+  <h2 class="mt-3">Location lost </h2>
+  <li class="list-group-item pt-3 pb-3 text-center" style="color:#004358; border-radius:15px 15px 0 0">
+    <%= @poster.address %>
+  </li>
 
   <div style="width: 100%; height: 200px;"
     data-controller="mapbox"
@@ -61,16 +63,16 @@
 
   <div class="row m-3">
     <div class="col-6 d-flex justify-content-start">
-      <%= link_to "Home", root_path, class:"btn btn-lg", style:"background-color: #616161; color: white; border-radius: 10px;" %>
+      <%= link_to "Home", root_path, class:"btn btn-lg d-flex align-items-center", style:"background-color: #616161; color: white; border-radius: 10px;" %>
     </div>
-  <% if current_user == @poster.pet.user %>
-    <div class="col-6 d-flex justify-content-end">
-        <%= link_to "Print", root_path, class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
-    </div>
-  <% else %>
-    <div class="col-6 d-flex justify-content-end">
-        <%= link_to "Message Owner", print_poster_path(@poster), class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
-    </div>
-  <% end %>
+    <% if current_user == @poster.pet.user %>
+      <div class="col-6 d-flex justify-content-end">
+          <%= link_to "Print", root_path, class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
+      </div>
+    <% else %>
+      <div class="col-6 d-flex justify-content-end">
+          <%= link_to "Message #{@poster.pet.user.first_name}", contact_path(@poster.pet.user), class:"btn d-flex align-items-center", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
+      </div>
+    <% end %>
   </div>
 </div>

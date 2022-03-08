@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :messages, only: :create
   end
 
+  get 'chatrooms/:user_id/contact', to: 'chatrooms#contact', as: 'contact'
+
   resources :pets
   get '/my_pets', to: 'pets#my_pets'
 
