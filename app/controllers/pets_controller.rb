@@ -8,7 +8,7 @@ class PetsController < ApplicationController
         lat: report.latitude,
         lng: report.longitude,
         #info_window: render_to_string(partial: "info_window_report", locals: { report: report }),
-        image_url: helpers.asset_url("peticon.png")
+        image_url: helpers.asset_url("reporticon.png")
       }
     end
 
