@@ -43,6 +43,26 @@ ActiveRecord::Schema.define(version: 2022_03_07_194458) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "chatrooms", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_one_id"
+    t.bigint "user_two_id"
+    t.index ["user_one_id"], name: "index_chatrooms_on_user_one_id"
+    t.index ["user_two_id"], name: "index_chatrooms_on_user_two_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.string "content"
+    t.bigint "chatroom_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
   create_table "pets", force: :cascade do |t|
     t.string "name"
     t.string "species"
@@ -106,6 +126,10 @@ ActiveRecord::Schema.define(version: 2022_03_07_194458) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chatrooms", "users", column: "user_one_id"
+  add_foreign_key "chatrooms", "users", column: "user_two_id"
+  add_foreign_key "messages", "chatrooms"
+  add_foreign_key "messages", "users"
   add_foreign_key "pets", "users"
   add_foreign_key "posters", "pets"
   add_foreign_key "reports", "users"
