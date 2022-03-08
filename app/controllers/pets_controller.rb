@@ -30,6 +30,9 @@ class PetsController < ApplicationController
     @pet.user = current_user
 
     if @pet.save
+      @poster = @pet.posters.last
+      @poster.address = @poster.address.gsub(/ \w\d\w \d\w\d,/, "")
+      @poster.save
       redirect_to poster_confirm_path(@pet.posters.last)
     else
       render 'posters/new'
