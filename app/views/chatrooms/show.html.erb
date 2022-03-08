@@ -1,21 +1,26 @@
-<div class="container chatroom" data-controller="chatroom-subscription" data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>">
+<% if @chatroom.user_one == current_user %>
+  <% other_user = @chatroom.user_two %>
+<% else %>
+  <% other_user = @chatroom.user_one %>
+<% end %>
 
-  <% if @chatroom.user_one == current_user %>
-    <% other_user = @chatroom.user_two %>
-  <% else %>
-    <% other_user = @chatroom.user_one %>
+<div class="container chatroom" data-controller="chatroom-subscription" data-chatroom-subscription-chatroom-id-value="<%= @chatroom.id %>", data-chatroom-subscription-user-id-value= "<%= current_user.id %>">
+  <% photo_url = other_user.photo.key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(other_user.photo.key) %>
+  <div class="d-flex justify-content-center position-relative" style="border-bottom: 1px solid #A3A3A3;">
+    <%= link_to "⟨ Back", dashboard_messages_path, class: "position-absolute align-self-center", style: "text-decoration: none; color: black; left: 0;" %>
+    <%= image_tag photo_url, class: "avatar align-self-center p-1", style: "height: 50px; width: 50px;" %>
+    <h3 class="align-self-center"><%= other_user.first_name %></h3>
+  </div>
+
+  <div class="messages" data-chatroom-subscription-target="messages">
+    <% @chatroom.messages.each do |message| %>
+      <%= render "messages/message", message: message %>
+    <% end %>
+  </div>
+
+  <%= simple_form_for [@chatroom, @message], remote: true, html: {data: {chatroom_subscription_target: "form"}, class: "d-flex"} do |f| %>
+    <%= f.input :content, label: false, placeholder: "Message", wrapper_html: {class: "flex-grow-1"} %>
+    <%= f.input :photo, as: :file, label: "＋", input_html: { hidden: true }, label_html: {class:"btn ms-1", style:"background-color: indigo; color: white; border-radius: 10px;"} %>
+    <%= f.submit "Send", class:"btn ms-1", style:"max-height: 38px; background-color: #046E8F; color: white; border-radius: 10px;" %>
   <% end %>
-      <h1><%= other_user.first_name %></h1>
-
-      <div class="messages" data-chatroom-subscription-target="messages">
-        <% @chatroom.messages.each do |message| %>
-          <%= render "messages/message", message: message %>
-        <% end %>
-      </div>
-
-      <%= simple_form_for [@chatroom, @message], remote: true, html: {data: {chatroom_subscription_target: "form"}, class: "d-flex"} do |f| %>
-        <%= f.input :content, label: false, placeholder: "Message", wrapper_html: {class: "flex-grow-1"} %>
-        <%= f.submit "Send", class: "btn btn-primary" %>
-      <% end %>
-
 </div>

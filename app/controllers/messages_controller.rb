@@ -5,7 +5,7 @@ class MessagesController < ApplicationController
     @message.chatroom = @chatroom
     @message.user = current_user
     if @message.save
-      ChatroomChannel.broadcast_to( @chatroom, render_to_string(partial: "message", locals: { message: @message }))
+      ChatroomChannel.broadcast_to(@chatroom, render_to_string(partial: "message", locals: { message: @message }))
       head :ok
     else
       render "chatrooms/show"
@@ -15,6 +15,6 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:content, :photo)
   end
 end

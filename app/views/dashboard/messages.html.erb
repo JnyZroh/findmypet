@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-2">
   <h1>Messages</h1>
   <% @chatrooms.each do |chatroom| %>
     <% if chatroom.user_one === current_user %>
@@ -15,7 +15,7 @@
         <div class="flex-grow-1">
           <div class="card-body p-2">
             <h5 class="card-title" style="font-size: 18px;"><%= other_user.first_name %></h5>
-            <p class="card-text" style="font-size: 14px;"><%= "This is the last message that was sent".truncate(35) %></p>
+            <p class="card-text" style="font-size: 14px;"><%= chatroom.messages.last.content.truncate(35) %></p>
             <%= link_to "", chatroom_path(chatroom), class:"stretched-link"%>
           </div>
         </div>
