@@ -1,0 +1,25 @@
+<div class="container mt-2">
+  <h1>Messages</h1>
+  <% @chatrooms.each do |chatroom| %>
+    <% if chatroom.user_one === current_user %>
+      <% other_user = chatroom.user_two %>
+    <% else %>
+      <% other_user = chatroom.user_one %>
+    <% end %>
+    <div class="card mb-2 mx-auto" style="max-width: 400px; border-radius: 10px;">
+      <div class="d-flex align-items-center">
+        <div class="flex-shrink-0">
+          <% photo_url = other_user.photo.key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(other_user.photo.key) %>
+          <img src="<%= photo_url %>" class="img-fluid m-2" style="border-radius: 50%; max-width: 65px;" alt="user image">
+        </div>
+        <div class="flex-grow-1">
+          <div class="card-body p-2">
+            <h5 class="card-title" style="font-size: 18px;"><%= other_user.first_name %></h5>
+            <p class="card-text" style="font-size: 14px;"><%= chatroom.messages.last.content.truncate(35) %></p>
+            <%= link_to "", chatroom_path(chatroom), class:"stretched-link"%>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
