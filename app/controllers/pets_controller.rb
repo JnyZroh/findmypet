@@ -4,23 +4,27 @@ class PetsController < ApplicationController
     @markers = []
 
     @reports.each do |report|
-      @markers << {
-        lat: report.latitude,
-        lng: report.longitude,
-        #info_window: render_to_string(partial: "info_window_report", locals: { report: report }),
-        image_url: helpers.asset_url("reporticon.png")
-      }
+      if report.user != current_user
+        @markers << {
+          lat: report.latitude,
+          lng: report.longitude,
+          info_window: render_to_string(partial: "info_window_report", locals: { report: report }),
+          image_url: helpers.asset_url("reporticon.png")
+        }
+      end
     end
 
     @posters = Poster.all
 
     @posters.each do |poster|
-      @markers << {
-        lat: poster.latitude,
-        lng: poster.longitude,
-        info_window: render_to_string(partial: "info_window_poster", locals: { poster: poster }),
-        image_url: helpers.asset_url("peticon.png")
-      }
+      if poster.pet.user != current_user
+        @markers << {
+          lat: poster.latitude,
+          lng: poster.longitude,
+          info_window: render_to_string(partial: "info_window_poster", locals: { poster: poster }),
+          image_url: helpers.asset_url("peticon.png")
+        }
+      end
     end
   end
 
