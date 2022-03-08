@@ -5,7 +5,7 @@
   background-size: cover;
   background-position: center;
   padding: 50px 0 120px 0;
-  background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.squarespace-cdn.com/content/v1/5e498ce4647539551e1cd2fa/1602283258952-QRUJHVS3NLA7C32PA5RM/Man+Hugging+Dog+eric-ward-ISg37AI2A-s-unsplash.jpg);
+  background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(https://images.squarespace-cdn.com/content/v1/5e498ce4647539551e1cd2fa/1602283258952-QRUJHVS3NLA7C32PA5RM/Man+Hugging+Dog+eric-ward-ISg37AI2A-s-unsplash.jpg);
 
   img {
     position: absolute;
@@ -16,19 +16,9 @@
   }
 }
 
-.banner h1 {
-  margin: 0;
-  color: white;
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
-  font-size: 32px;
-  font-weight: bold;
-}
-
 .banner p {
-  font-size: 20px;
+  font-size: 22px;
   color: white;
-  opacity: .7;
-  text-shadow: 1px 1px 3px rgba(236, 226, 226, 0.2);
 }
 .btn-ghost {
   color: #4A4A4A;
@@ -38,6 +28,7 @@
   font-weight: lighter;
   opacity: 0.6;
   transition: opacity 0.3s ease;
+  margin-top: 24px;
 }
 
 .btn-ghost:hover {
@@ -50,6 +41,8 @@
   border-radius: 4px;
   background: #2bd689;
   transition: background 0.3s ease;
+  text-shadow:1px 1px 3px rgba(252, 247, 247, 0.2);
+  margin-top: 24px;
 }
 
 .btn-flat:hover {

@@ -1,9 +1,9 @@
 <% if message.user == current_user %>
   <div class="d-flex justify-content-end" id="<%= message.user.id %>">
-    <div class="m-1 p-2 blue-bubble">
+    <div class="m-1 p-2 blue-bubble" style="max-width: 400px;">
 <% else %>
   <div>
-    <div class="m-1 p-2 gray-bubble">
+    <div class="m-1 p-2 gray-bubble" style="max-width: 400px;">
 <% end %>
       <small>
         <strong><%= message.user.first_name %></strong>
