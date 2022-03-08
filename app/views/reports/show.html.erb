@@ -1,57 +1,66 @@
-<div class="wrapper m-3">
-  <div class="container">
-    <div class="text-center mb-3" style="color: #004358;">
-      <h1><strong>Report Submitted!</strong></h1>
+<% if @report.photos.any? %>
+  <div id="petImagesCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <% @report.photos.each_with_index do |photo, index| %>
+        <% if index == 0 %>
+          <button type="button" data-bs-target="#petImagesCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <% else %>
+          <button type="button" data-bs-target="#petImagesCarousel" data-bs-slide-to="<%= index %>" aria-label="Slide <%= index + 1 %> "></button>
+        <% end %>
+      <% end %>
     </div>
-
-    <div class="d-flex justify-content-center">
-      <div class="card border-0" style="width: 65%; border-radius: 20px; max-width: 200px;">
-        <% photo_url = @report.photos[0].key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(@report.photos[0].key) %>
-        <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 175px; object-fit: cover; border-radius: 17px;" alt="Pet photo">
-        <div class="card-body text-center">
-          <h5 class="card-title"><strong> <%= @report.report_type %> <%= @report.species %></strong></h5>
-          <p class="card-text">Last seen: <%= truncate(@report.address, :length => 30) %></p>
-          <p class="card-text"><strong><%= @report.date_spotted %></strong></p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="wrapper m-3">
-  <div class="container">
-    <h2>Potential Matches</h2>
-    <% count = 0 %>
-    <% @nearby.each do |poster| %>
-    <%# check for all posters nearby %>
-      <% if !poster.latitude.nil? || !poster.latitude.nil?  %>
-        <%# show posters with same color and species %>
-        <% if @report.color == poster.pet.color && @report.species == poster.pet.species %>
-          <% count =+ 1 %>
-          <div class="d-flex justify-content-center">
-            <div class="card border-0" style="width: 65%; border-radius: 20px; max-width: 200px;">
-              <% photo_url = poster.pet.photos[0].key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(poster.pet.photos[0].key) %>
-              <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 175px; object-fit: cover; border-radius: 17px;" alt="Pet photo">
-              <div class="card-body text-center">
-                <h5 class="card-title"><strong><%= poster.pet.name %></strong></h5>
-                <p class="card-text">Last seen: <%= poster.address %></p>
-                <p class="card-text"><strong><%= poster.date_missing %></strong></p>
-              </div>
-            </div>
+    <div class="carousel-inner">
+      <% @report.photos.each_with_index do |photo, index| %>
+        <% if index == 0 %>
+          <div class="carousel-item active">
+            <% photo_url = cl_image_path(photo.key) %>
+            <img src="<%= photo_url %>"  class="d-block w-100" style="max-height: 600px; object-fit: cover;" alt="A different angle of the same pet">
+          </div>
+        <% else %>
+          <div class="carousel-item">
+            <% photo_url = cl_image_path(photo.key) %>
+            <img src="<%= photo_url %>"  class="d-block w-100" style="max-height: 600px; object-fit: cover;" alt="A different angle of the same pet">
           </div>
         <% end %>
       <% end %>
-    <% end %>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#petImagesCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#petImagesCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+<% end %>
 
-    <%# if none, show "No potential matches. Thank you for reporting!" %>
-    <% if count == 0 %>
-      <p>No matches found. Thank you for reporting this lost pet! </p>
-    <% end %>
+<div class="container" style="color:#004358">
+
+  <h1 class="mt-3 text-center"><strong><%= @report.report_type %> <%= @report.species %></strong></h1>
+
+  <ul class="list-group d-flex flex-column mt-3" style="border-radius:15px">
+    <li class="list-group-item" style="color:#004358"><p><strong>Last seen</strong> : <%= @report.date_spotted %></li>
+    <li class="list-group-item" style="color:#004358"><p><strong>Color</strong> : <%= @report.color %></p></li>
+  </ul>
+  <ul class="list-group d-flex flex-column mt-3" style="border-radius:15px">
+    <li class="list-group-item" style="color:#004358"><p><strong>Description</strong> : <%= @report.description %></p></li>
+  </ul>
+
+  <h2 class="mt-3">Location spotted</h2>
+  <li class="list-group-item" style="color:#004358; border-radius:15px 15px 0 0;"><p><%= @report.address %></p></li>
+
+  <div style="width: 100%; height: 200px; border-radius:0 0 15px 15px"
+    data-controller="mapbox"
+    data-mapbox-markers-value="<%= @markers.to_json %>"
+    data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+
+  <div class="row m-3">
+    <div class="col-6 d-flex justify-content-start">
+      <%= link_to "Home", root_path, class:"btn btn-lg", style:"background-color: #616161; color: white; border-radius: 10px;" %>
+    </div>
+    <div class="col-6 d-flex justify-content-end">
+        <%= link_to "View all", pets_path, class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
+    </div>
   </div>
 </div>
-
-<%# <div class="wrapper m-3">
-  <div class="container">
-    <h2>Recently Found Pets</h2>
-  </div>
-</div> %>

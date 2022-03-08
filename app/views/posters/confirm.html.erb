@@ -6,7 +6,7 @@
 
   <div class="d-flex justify-content-center">
     <div class="card border-0" style="width: 65%; border-radius: 20px; max-width: 200px;">
-      <% photo_url = @poster.pet.photos[0].key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(@poster.pet.photos[0].key) %>
+      <% photo_url = @poster.pet.photos.empty? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(@poster.pet.photos[0].key) %>
       <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 175px; object-fit: cover; border-radius: 17px;" alt="Pet photo">
       <div class="card-body text-center">
         <h5 class="card-title"><strong><%= @poster.pet.name %></strong></h5>
