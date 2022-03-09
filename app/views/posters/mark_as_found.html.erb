@@ -1,2 +1,28 @@
-<h1>Posters#mark_as_found</h1>
-<p>Find me in app/views/posters/mark_as_found.html.erb</p>
+<div class="container my-3" style="max-width:400px">
+  <h1 class="text-center">We're so glad you're reunited!</h1>
+  <div class="d-flex justify-content-center my-3">
+    <div class="card border-0" style="width: 65%; border-radius: 20px; max-width: 200px;">
+      <% photo_url = @poster.pet.photos.empty? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(@poster.pet.photos[0].key) %>
+      <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 175px; object-fit: cover; border-radius: 17px;" alt="Pet photo">
+      <div class="card-body text-center">
+        <h5 class="card-title"><strong><%= @poster.pet.name %></strong>❤️</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="row d-flex justify-content-center my-3">
+    <div class="col-8 text-center">
+      <p>Help others who are looking for their own pet.</p>
+    </div>
+  </div>
+
+
+<div class="row m-3">
+    <div class="col-5 d-flex justify-content-start">
+      <%= link_to "Home", root_path, class:"btn btn-lg d-flex align-items-center", style:"background-color: #616161; color: white; border-radius: 10px;" %>
+    </div>
+    <div class="col-7 d-flex justify-content-end">
+        <%= link_to " Find lost pets", pets_path, class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
+    </div>
+  </div>
+</div>
