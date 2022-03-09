@@ -58,17 +58,22 @@
                       <% @nearby = @nearby.select {|report| report.color == poster.pet.color && report.species == poster.pet.species}   %>
 
                       <% if @nearby.any? %>
-                        <div class="updates" style="position:relative"> Check <%= @nearby.size %> recent <%= "report".pluralize(@nearby.size) %> nearby!
+                        <div class="updates" style="position:relative"> Check similar <%= "report".pluralize(@nearby.size) %> from today!
                           <%= link_to "", "/dashboard", class:"stretched-link"%>
                         </div>
                       <% end %>
 
-                      <% if !@chatrooms.nil? && @chatrooms.last.messages.last.user != current_user %>
-                        <div class="updates">Check your recent messages!.</div>
+                      <% if !@chatrooms.empty? %>
+                        <% if @chatrooms.last.messages.last.user != current_user  %>
+                          <div class="updates">Check your recent message!</div>
+                        <% end %>
                       <% else %>
                         <div class="updates">Your poster is live.</div>
                       <% end %>
 
+                      <% if @chatrooms.last.messages.last.user == current_user && !@nearby.any? %>
+                        <div class="updates">No recent updates.</div>
+                      <% end %>
                       <div style="text-align:right"><%= link_to "View all", "/dashboard", class: "seeMoreLink"%></div>
                   </div>
                 <% end %>
