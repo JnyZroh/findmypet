@@ -6,8 +6,8 @@
 
     <% if user_signed_in? %>
       <% photo_url = current_user.photo.key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(current_user.photo.key) %>
-      <button class="navbar-toggler" style="background-color: #046E8F;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <%= image_tag photo_url, class: "avatar" %>
+      <button class="navbar-toggler" style="border:0; color: rgba(0,0,0,0); background: rgba(0,0,0,0);" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <%= image_tag photo_url, class: "avatar-large", style:"border: #046E8F 2px solid;"%>
       </button>
     <% else %>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,16 +19,16 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <%= link_to "Home", root_path, class: "nav-link" %>
+            <%= link_to "Home", root_path, class: "nav-link", style:"color: #046E8F; font-weight: bold;" %>
           </li>
           <li class="nav-item">
-           <%= link_to "Dashboard", dashboard_path, class: "nav-link" %>
+           <%= link_to "Dashboard", dashboard_path, class: "nav-link", style:"color: #046E8F; font-weight: bold;" %>
           </li>
           <li class="nav-item">
-           <%= link_to "Messages", dashboard_messages_path, class: "nav-link" %>
+           <%= link_to "Messages", dashboard_messages_path, class: "nav-link", style:"color: #046E8F; font-weight: bold;" %>
           </li>
           <li class="nav-item active">
-             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "nav-link", style:"color: #046E8F; font-weight: bold;" %>
           </li>
 
         <% else %>
