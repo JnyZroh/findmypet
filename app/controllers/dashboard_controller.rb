@@ -1,6 +1,7 @@
 class DashboardController < ApplicationController
   def index
     @pets = current_user.pets
+    # raise
   end
 
   def messages

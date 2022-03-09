@@ -39,100 +39,117 @@
     </div>
   </div>
 
-  <h3>My Posters</h3>
-  <% @pets.each do |pet| %>
-    <% if pet.posters.any? %>
-      <% pet.posters.each do |poster| %>
-      <% if !poster.found? %>
-        <div style="background-color: white; border-radius: 10px; padding:0px;">
-          <div class="row">
-            <div class="col-6">
-              <% photo_url = pet.photos.empty? ? 'https://www.cityofkingston.ca/documents/10180/3344460/Nav_Licensing_license.jpg' : cl_image_path(pet.photos[0].key) %>
-              <img src="<%= photo_url %>" class="img-fluid" style="width: 165px; height:165px; border-radius: 10px; object-fit: cover;" alt="user profile picture">
-            </div>
-            <div class="col-5" style="padding: 0px; color: white;">
-              <div class="d-flex flex-column bd-highlight">
-                <div class="bd-highlight m-3">
-                  <p style="color:black; margin-bottom: 5px; font-size: 18px; text-align:center">
-                    <strong><%= poster.pet.name %></strong><br>
-                  </p>
-                  <p style="color:black; margin-bottom: 5px; font-size: 16px; text-align:center">
-                    <% i = poster.address.index(',')-1 %>
-                    <% address = poster.address[0..i] %>
-                    Last seen near <%= address %>
-                  </p>
-                  <p style="color:black; margin-bottom: 5px; font-size: 16px; text-align:center">
-                    Posted on: <br><strong><%= poster.date_missing.strftime("%B %d, %Y") %></strong>
-                  </p>
+    <h3>My Posters</h3>
+    <% @pets.each do |pet| %>
+      <% if pet.posters.any? %>
+        <% pet.posters.each do |poster| %>
+
+          <% if !poster.found? %>
+            <div style="background-color: white; border-radius: 10px; padding:0px;">
+              <div class="row">
+                <div class="col-6">
+                  <% photo_url = pet.photos.empty? ? 'https://www.cityofkingston.ca/documents/10180/3344460/Nav_Licensing_license.jpg' : cl_image_path(pet.photos[0].key) %>
+                  <img src="<%= photo_url %>" class="img-fluid" style="width: 165px; height:165px; border-radius: 10px; object-fit: cover;" alt="user profile picture">
                 </div>
-                <div class="bd-highlight">
+                <div class="col-5" style="padding: 0px; color: white;">
+                  <div class="d-flex flex-column bd-highlight">
+                    <div class="bd-highlight m-3">
+                      <p style="color:black; margin-bottom: 5px; font-size: 18px; text-align:center">
+                        <strong><%= poster.pet.name %></strong><br>
+                      </p>
+                      <p style="color:black; margin-bottom: 5px; font-size: 16px; text-align:center">
+                        <% i = poster.address.index(',')-1 %>
+                        <% address = poster.address[0..i] %>
+                        Last seen near <%= address %>
+                      </p>
+                      <p style="color:black; margin-bottom: 5px; font-size: 16px; text-align:center">
+                        Posted on: <br><strong><%= poster.date_missing.strftime("%B %d, %Y") %></strong>
+                      </p>
+                    </div>
+                    <div class="bd-highlight">
+                    </div>
+                  </div>
                 </div>
               </div>
+              <div class="row mb-2">
+                <div class="d-grid col-5 mx-auto" style="padding: 8px;">
+                  <%= link_to poster_path(poster.id), class:"btn", style:"border-radius: 10px; font-size: 16px; padding: 5px; background-color: #046E8F; color: white; border-radius: 10px;" do %>
+                    View Poster
+                    <% end %>
+                </div>
+                <div class="d-grid col-5 mx-auto" style="padding: 8px;">
+                  <%= link_to edit_poster_path(poster.id), class:"btn", style:"border-radius: 10px; font-size: 16px; padding: 5px; background-color: #046E8F; color: white; border-radius: 10px;" do %>
+                    Add Info
+                    <% end %>
+                </div>
+
+              </div>
+
+              <%#= link_to "Found", found_path(poster), data: {confirm: "You are about to mark your pet as Found."} %>
+
+              <div class="row mt-3 text-center">
+                <p><strong>Other ways to locate <%= poster.pet.name %>:</strong></p>
+                <p>Print this poster and post in the neighborhood, where permitted:
+                  <%= link_to "Print", print_poster_path(poster) %></p>
+                <p>Send your pet's info to the SPCA at <br>
+                <a href="https://www.spca.com/en/lost-and-found/" target="_blank">www.spca.com/en/lost-and-found</a>
+                <br>or call the SPCA at 514-735-2711</p>
+              </div>
+
+                <div class="row mb-2">
+                  <div class="d-grid col-4 mx-auto" style="padding: 8px;">
+                    <%= link_to found_path(poster), class:"btn", data: {confirm: "You are about to mark your pet as Found."}, style:"background-color:#FFFFFF; border-radius: 10px; font-size: 16px; padding: 5px; color: #046E8F; border:2px solid #046E8F; border-radius: 10px;" do %>
+                      <strong>Found!</strong>
+                      <% end %>
+                  </div>
+                </div>
             </div>
-          </div>
-          <div class="row mb-2">
-            <div class="d-grid col-5 mx-auto" style="padding: 8px;">
-              <%= link_to poster_path(poster.id), class:"btn", style:"border-radius: 10px; font-size: 16px; padding: 5px; background-color: #046E8F; color: white; border-radius: 10px;" do %>
-                View Poster
+
+            <div class="my-4" style="padding: 10px;">
+              <h3>Updates</h3>
+              <div class="row">
+
+                <% @nearby = Report.near([poster.latitude, poster.longitude], 2, :units => :km, :order => :distance) %>
+                <% @nearby = @nearby.select {|report| report.date_spotted == Date.today } %>
+                <% @nearby = @nearby.select {|report| report.color == poster.pet.color && report.species == poster.pet.species} %>
+
+                <% if @nearby.any? %>
+                  <div class="updates"> Check these potential matches:</div>
+                    <ul>
+                      <% @nearby.each do |report| %>
+                        <% i = report.address.index(',')-1 %>
+                        <% address = report.address[0..i] %>
+                        <li style="padding:0 0 5px 20px; list-style-type: none">
+                          <%= link_to "See report", report_path(report) %> of a <%= report.color %> <%= report.species %> seen near: <%= address %>
+                        </li>
+                      <% end %>
+                    </ul>
+                <% else %>
+                  <div class="updates"> No matching reports yet!</div>
                 <% end %>
-            </div>
-            <div class="d-grid col-5 mx-auto" style="padding: 8px;">
-              <%= link_to edit_poster_path(poster.id), class:"btn", style:"border-radius: 10px; font-size: 16px; padding: 5px; background-color: #046E8F; color: white; border-radius: 10px;" do %>
-                Add Info
+              </div>
+
+              <div class="row">
+                <% if !@chatrooms.nil? && @chatrooms.last.messages.last.user != current_user %>
+                  <div class="updates">Check your recent messages!.</div>
+                <% else %>
+                  <div class="updates">Your poster is live.</div>
                 <% end %>
+              </div>
             </div>
-          </div>
 
-          <%= link_to "Found", found_path(poster), data: {confirm: "You are about to mark your pet as Found."} %>
-
-          <div class="row mt-3 text-center">
-            <p><strong>Other ways to locate <%= poster.pet.name %>:</strong></p>
-            <p>Print this poster and post in the neighborhood, where permitted:
-              <%= link_to "Print", print_poster_path(poster) %></p>
-            <p>Send your pet's info to the SPCA at <br>
-            <a href="https://www.spca.com/en/lost-and-found/" target="_blank">www.spca.com/en/lost-and-found</a>
-            <br>or call the SPCA at 514-735-2711</p>
-          </div>
-        </div>
-
-        <div class="my-4" style="padding: 10px;">
-          <h3>Updates</h3>
-          <div class="row">
-
-            <% @nearby = Report.near([poster.latitude, poster.longitude], 2, :units => :km, :order => :distance) %>
-            <% @nearby = @nearby.select {|report| report.date_spotted == Date.today } %>
-            <% @nearby = @nearby.select {|report| report.color == poster.pet.color && report.species == poster.pet.species} %>
-            <% if @nearby.any? %>
-              <div class="updates"> Check these potential matches:</div>
-                <ul>
-                  <% @nearby.each do |report| %>
-                    <% i = report.address.index(',')-1 %>
-                    <% address = report.address[0..i] %>
-                    <li style="padding:0 0 5px 20px; list-style-type: none">
-                      <%= link_to "See report", report_path(report) %> of a <%= report.color %> <%= report.species %> seen near: <%= address %>
-                    </li>
-                  <% end %>
-                </ul>
-              <% else %>
-                <div class="updates"> No updates yet!</div>
-              <% end %>
-
-          </div>
-          <div class="row">
-              <div class="updates"> Your poster was posted!</div>
-          </div>
-        </div>
-
-      <% end %>
+          <% else %>
+            <p>We're glad you found <%= poster.pet.name %>!! ❤️</p>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
 
-<% if current_user.reports.any? %>
-  <h3>My Reports</h3>
-  <div class="mb-4" style="background-color: #046E8F; border-radius: 10px; padding: 10px;">
-    <div class="row">
-    </div>
-  </div>
-<% end %>
+<%# if current_user.reports.any? %>
+  <%# <h3>My Reports</h3> %>
+  <%# <div class="mb-4" style="background-color: #046E8F; border-radius: 10px; padding: 10px;"> %>
+    <%# <div class="row"> %>
+    <%# </div> %>
+  <%# </div> %>
+<%# end %>
 </div>

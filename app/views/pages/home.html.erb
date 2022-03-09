@@ -27,11 +27,12 @@
   <% if user_signed_in? %>
     <div class="container">
       <% if current_user.pets.any?%>
-        <% if current_user.pets[0].posters.any? %>
+        <% if current_user.pets.last.posters.any? %>
           <h2 style="color: white; font-weight:bold;">Your <%= "Poster".pluralize(current_user.pets[0].posters) %></h2>
           <div class="row justify-content-center my-3">
             <% current_user.pets.each do |pet| %>
               <% pet.posters.each do |poster| %>
+
                 <% if !poster.found? %>
                   <div class="col-6">
                     <div class="card mb-3" style="height: 250px; border-radius: 20px; max-width: 170px;">
@@ -49,23 +50,27 @@
                       </div>
                     </div>
                   </div>
-                <div class="col-5">
-                  <h4  style="color: white;">Updates</h4>
-                    <% @nearby = Report.near([poster.latitude, poster.longitude], 2, :units => :km, :order => :distance) %>
-                    <% @nearby = @nearby.select {|report| report.date_spotted == Date.today } %>
-                    <% @nearby = @nearby.select {|report| report.color == poster.pet.color && report.species == poster.pet.species}   %>
+                  <div class="col-5">
+                    <h4  style="color: white;">Updates</h4>
 
-                    <% if @nearby.empty? %>
-                      <div class="updates">No other updates !</div>
-                    <% else %>
+                      <% @nearby = Report.near([poster.latitude, poster.longitude], 2, :units => :km, :order => :distance) %>
+                      <% @nearby = @nearby.select {|report| report.date_spotted == Date.today } %>
+                      <% @nearby = @nearby.select {|report| report.color == poster.pet.color && report.species == poster.pet.species}   %>
 
-                      <div class="updates" style="position:relative"> Check <%= @nearby.size %> recent <%= "report".pluralize(@nearby.size) %> nearby!
-                        <%= link_to "", "/dashboard", class:"stretched-link"%>
-                      </div>
-                    <% end %>
-                      <div class="updates">Your poster is live.</div>
-                  <div style="text-align:right"><%= link_to "View all", "/dashboard", class: "seeMoreLink"%></div>
-                </div>
+                      <% if @nearby.any? %>
+                        <div class="updates" style="position:relative"> Check <%= @nearby.size %> recent <%= "report".pluralize(@nearby.size) %> nearby!
+                          <%= link_to "", "/dashboard", class:"stretched-link"%>
+                        </div>
+                      <% end %>
+
+                      <% if !@chatrooms.nil? && @chatrooms.last.messages.last.user != current_user %>
+                        <div class="updates">Check your recent messages!.</div>
+                      <% else %>
+                        <div class="updates">Your poster is live.</div>
+                      <% end %>
+
+                      <div style="text-align:right"><%= link_to "View all", "/dashboard", class: "seeMoreLink"%></div>
+                  </div>
                 <% end %>
               <% end %>
             <% end %>
@@ -77,7 +82,6 @@
 
   <div class="container">
     <h3 style="color: white; font-weight:bold;">Missing Pets Near You</h3>
-
     <% if @posters.any? %>
       <div class="row row-cols-2 row-cols-md-4 gy-3 m-0">
         <% @posters.each do |poster| %>
