@@ -6,7 +6,7 @@
 
     <% if user_signed_in? %>
       <% photo_url = current_user.photo.key.nil? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(current_user.photo.key) %>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" style="background-color: #046E8F;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <%= image_tag photo_url, class: "avatar" %>
       </button>
     <% else %>
