@@ -56,6 +56,10 @@ class PostersController < ApplicationController
   end
 
   def mark_as_found
+    @poster = Poster.find(params[:poster_id])
+    @poster.found = true
+    @poster.date_found = Date.today
+    @poster.save
   end
 
   def index
