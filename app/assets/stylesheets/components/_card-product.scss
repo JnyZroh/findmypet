@@ -35,3 +35,15 @@
   color: #046E8F;
   font-weight: 700;
 }
+
+.card:hover {
+  filter: drop-shadow(0 0 0.75rem black);
+}
+
+.grow {
+  transition: all .2s ease-in-out;
+}
+
+.grow:hover {
+  transform: scale(1.1);
+}
