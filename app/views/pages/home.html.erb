@@ -76,7 +76,10 @@
   <% end %>
 
   <div class="container">
-    <h3 style="color: white; font-weight:bold;">Missing Pets Near You</h3>
+    <div class="d-flex justify-content-between">
+      <h3 class="d-flex align-items-center m-0" style="color: white; font-weight:bold;">Missing Pets Near You</h3>
+      <%= link_to "See All", pets_path, class:"btn", style:"background-color: white; color: #046E8F; border-radius: 10px;" %>
+    </div>
 
     <% if @posters.any? %>
       <div class="row row-cols-2 row-cols-md-4 gy-3 m-0">
@@ -111,55 +114,54 @@
         <% end %>
       </div>
     <% end %>
-
-    <div class="d-flex justify-content-end align-items-end">
-      <%= link_to "See more", pets_path, class:"btn mb-3", style:"background-color: white; color: #046E8F; border-radius: 10px;" %>
-    </div>
   </div>
 </div>
 
-  <img src="<%= image_path('wave.png') %>" class="m-0 p-0" alt="Overlay" style="transform: rotate(0.5turn); width: 100%; position:relative; top: -5px;">
+<img src="<%= image_path('wave.png') %>" class="m-0 p-0" alt="Overlay" style="transform: rotate(0.5turn); width: 100%; position:relative; top: -5px;">
 
 <div class="mt-0" style="">
   <div class="container mb-3">
-      <h3 style="color: #046E8F; font-weight:bold;">Reported Pets Near You</h3>
+    <div class="d-flex justify-content-between">
+      <h3 class="d-flex align-items-center m-0" style="color: #046E8F; font-weight:bold;">Reported Pets Near You</h3>
+      <%= link_to "See All", pets_path, class:"btn", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
+    </div>
 
-      <% if @reports.any? %>
-        <div class="row row-cols-2 row-cols-md-4 gy-3 m-0">
-          <% @reports.last(4).each do |report| %>
-            <% if report.user != current_user %>
-              <div class="col mb-2">
-                <div class="card mx-auto" style="height: 250px; border-radius: 20px; max-width: 170px; border: 0;">
-                  <% photo_url = report.photos.empty? ? 'https://www.vets4pets.com/globalassets/close-up-of-cat-looking-up.jpg?w=585&scale=down' : cl_image_path(report.photos[0].key) %>                <div class="parent">
-                    <img src="<%= photo_url %>" class="card-img-top image1 rounded-bottom" style="object-fit: cover; border-radius: 19px; height: 130px;" alt="Pet photo">
-                    <img src="<%= image_path('overlay.png') %>" class="card-img-top image2 rounded-bottom" style="object-fit: cover; border-radius: 20px; height: 135px;" alt="Overlay">
-                  </div>
-                  <div class="card-body text-center p-1">
-                    <h5 class="card-title" style="font-size: 24px;">
-                      <strong><%= report.report_type.nil? ? report.species : "#{report.report_type} #{report.species}" %></strong>
-                    </h5>
-                    <p class="card-text" style="font-size: 15px;">
-                      Last seen:
-                    </p>
-                    <p class="card-text" style="font-size: 14px; line-height: 1em;">
-                      <%= truncate(report.address) %>
-                    </p>
-                    <p class="card-text" style="font-size: 15px; line-height: 2em;">
-                      <strong><%= report.date_spotted %></strong>
+    <% if @reports.any? %>
+      <div class="row row-cols-2 row-cols-md-4 gy-3 m-0">
+        <% @reports.last(4).each do |report| %>
+          <% if report.user != current_user %>
+            <div class="col mb-2">
+              <div class="card mx-auto" style="height: 250px; border-radius: 20px; max-width: 170px; border: 0;">
+                <% photo_url = report.photos.empty? ? 'https://www.vets4pets.com/globalassets/close-up-of-cat-looking-up.jpg?w=585&scale=down' : cl_image_path(report.photos[0].key) %>                <div class="parent">
+                  <img src="<%= photo_url %>" class="card-img-top image1 rounded-bottom" style="object-fit: cover; border-radius: 19px; height: 130px;" alt="Pet photo">
+                  <img src="<%= image_path('overlay.png') %>" class="card-img-top image2 rounded-bottom" style="object-fit: cover; border-radius: 20px; height: 135px;" alt="Overlay">
+                </div>
+                <div class="card-body text-center p-1">
+                  <h5 class="card-title" style="font-size: 24px;">
+                    <strong><%= report.report_type.nil? ? report.species : "#{report.report_type} #{report.species}" %></strong>
+                  </h5>
+                  <p class="card-text" style="font-size: 15px;">
+                    Last seen:
+                  </p>
+                  <p class="card-text" style="font-size: 14px; line-height: 1em;">
+                    <%= truncate(report.address) %>
+                  </p>
+                  <p class="card-text" style="font-size: 15px; line-height: 2em;">
+                    <strong><%= report.date_spotted %></strong>
 
-                    </p>
-                    <%= link_to "", report_path(report), class:"stretched-link"%>
-                  </div>
+                  </p>
+                  <%= link_to "", report_path(report), class:"stretched-link"%>
                 </div>
               </div>
-            <% end %>
-
+            </div>
           <% end %>
-        </div>
-      <% end %>
 
-      <div class="d-flex justify-content-end align-items-end">
-        <%= link_to "See more", pets_path, class:"btn", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
+        <% end %>
       </div>
-    </div>
+    <% end %>
   </div>
+</div>
+
+<footer class="d-flex align-items-center" style="background-color: #046E8F; height: 50px; width: 100%;">
+  <p class="text-center m-0" style="width:100%; color: white;">Copyright &copy; FindMyPet</p>
+</footer>
