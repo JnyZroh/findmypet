@@ -99,25 +99,23 @@
           <h3>Updates</h3>
           <div class="row">
 
-            <%# @nearby = Report.near([poster.latitude, poster.longitude], 2, :units => :km, :order => :distance) %>
-            <%# @nearby = @nearby.select {|report| Date.today - report.date_spotted <= 1 } %>
-            <%# @nearby = @nearby.select {|report| report.color == poster.pet.color && report.species == poster.pet.species}   %>
-            <%# if @nearby.any? %>
+            <% @nearby = Report.near([poster.latitude, poster.longitude], 2, :units => :km, :order => :distance) %>
+            <% @nearby = @nearby.select {|report| report.date_spotted == Date.today } %>
+            <% @nearby = @nearby.select {|report| report.color == poster.pet.color && report.species == poster.pet.species} %>
+            <% if @nearby.any? %>
               <div class="updates"> Check these potential matches:</div>
-                <%# <ul> %>
-                  <%# @nearby.each do |report| %>
-                    <%# i = report.address.index(',')-1 %>
-                    <%# address = report.address[0..i] %>
-                    <%# <li style="padding:0 0 5px 20px; list-style-type: none"> %>
-                      <%# <%= link_to "See report", report_path(report) %>
-                      <%# of a <%= report.color %> <%#= report.species %>
-                      <%#> seen near: <%= address %>
-                      <%# </li>
+                <ul>
+                  <% @nearby.each do |report| %>
+                    <% i = report.address.index(',')-1 %>
+                    <% address = report.address[0..i] %>
+                    <li style="padding:0 0 5px 20px; list-style-type: none">
+                      <%= link_to "See report", report_path(report) %> of a <%= report.color %> <%= report.species %> seen near: <%= address %>
+                    </li>
                   <% end %>
-                <%# </ul> %>
-              <%# else %>
+                </ul>
+              <% else %>
                 <div class="updates"> No updates yet!</div>
-              <%# end %>
+              <% end %>
 
           </div>
           <div class="row">
