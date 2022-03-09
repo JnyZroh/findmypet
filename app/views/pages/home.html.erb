@@ -51,20 +51,18 @@
                   </div>
                 <div class="col-5">
                   <h4  style="color: white;">Updates</h4>
-                  <%# @nearby checks distance, species, color %>
-                    <%# @nearby = Report.near([poster.latitude, poster.longitude], 2, :units => :km, :order => :distance) %>
-                    <%# @nearby = @nearby.select {|report| Date.today - report.date_spotted <= 1 } %>
-                    <%# @nearby = @nearby.select {|report| report.color == poster.pet.color && report.species == poster.pet.species}   %>
+                    <% @nearby = Report.near([poster.latitude, poster.longitude], 2, :units => :km, :order => :distance) %>
+                    <% @nearby = @nearby.select {|report| report.date_spotted == Date.today } %>
+                    <% @nearby = @nearby.select {|report| report.color == poster.pet.color && report.species == poster.pet.species}   %>
 
-                    <%# if @nearby.empty? %>
+                    <% if @nearby.empty? %>
                       <div class="updates">No other updates !</div>
-                    <%# else %>
+                    <% else %>
 
-                      <%# <div class="updates"> Check <%= @nearby.size recent <%= "report".pluralize(@nearby.size) %>
-                      <%# nearby! %>
-                      <%#= link_to "", "/dashboard", class:"stretched-link"%>
-                      <%# </div> %>
-                    <%# end %>
+                      <div class="updates" style="position:relative"> Check <%= @nearby.size %> recent <%= "report".pluralize(@nearby.size) %> nearby!
+                        <%= link_to "", "/dashboard", class:"stretched-link"%>
+                      </div>
+                    <% end %>
                       <div class="updates">Your poster is live.</div>
                   <div style="text-align:right"><%= link_to "View all", "/dashboard", class: "seeMoreLink"%></div>
                 </div>
