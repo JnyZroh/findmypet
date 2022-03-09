@@ -32,7 +32,6 @@ class ReportsController < ApplicationController
     @report = Report.find(params[:report_id])
     @posters = Poster.all
     @nearby = Poster.near([@report.latitude, @report.longitude], 2, :units => :km, :order => :distance)
-    raise
   end
 
   private
