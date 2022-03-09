@@ -19,7 +19,7 @@
   </div>
 
   <%= simple_form_for [@chatroom, @message], remote: true, html: {data: {chatroom_subscription_target: "form"}, class: "d-flex"} do |f| %>
-    <%= f.input :content, label: false, placeholder: "Message", wrapper_html: {class: "flex-grow-1"}, input_html: { class: ""} %>
+    <%= f.input :content, label: false, placeholder: "Message", wrapper_html: {class: "flex-grow-1"}, input_html: { style: "border-radius: 10px;"} %>
     <%= f.input :photo, as: :file, label: "＋", input_html: { hidden: true }, label_html: {class:"btn ms-1", style:"background-color: #616161; color: white; border-radius: 10px;"} %>
     <%= f.submit "Send", class:"btn ms-1", style:"max-height: 38px; background-color: #046E8F; color: white; border-radius: 10px;" %>
   <% end %>
