@@ -8,7 +8,7 @@
       <h2 style="font-weight:bold; margin: 10px">Missing <%= @poster.pet.species.capitalize %>: <%= @poster.pet.name.capitalize %></h2>
       <% i = @poster.address.index(',')-1 %>
       <% address = @poster.address[0..i] %>
-      <p style="font-size:13px; margin: 5px 10px 15px 10px">Red Husky, last seen near <%= address %><br>Missing since <%= @poster.date_missing.strftime("%A, %B %d, %Y") %></p>
+      <p style="font-size:13px; margin: 5px 10px 15px 10px"><%= @poster.pet.color.capitalize %>, <%= @poster.pet.breed.capitalize %> <%= @poster.pet.species %>, last seen near <%= address %><br>Missing since <%= @poster.date_missing.strftime("%A, %B %d, %Y") %></p>
       <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 200px; width: 65%; margin:0 auto; object-fit: cover;" alt="Pet photo">
       <div class="card-body text-center">
         <p class="card-text" style="font-size:13px; margin: 5px 10px"><%= @poster.comment %></p>

@@ -70,7 +70,7 @@
     </div>
     <% if current_user == @poster.pet.user %>
       <div class="col-6 d-flex justify-content-end">
-          <%= link_to "Print", root_path, class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
+          <%= link_to "Print", print_poster_path(@poster), class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
       </div>
     <% else %>
       <div class="col-6 d-flex justify-content-end">

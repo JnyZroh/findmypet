@@ -13,13 +13,17 @@ class PosterPdf < Prawn::Document
 
 
   def header
-    text "Missing #{@poster.pet.species.capitalize}: #{@poster.pet.name.capitalize}",
+    text "Missing #{@poster.pet.species.capitalize}:",
+    size: 28,  align: :center
+    text "#{@poster.pet.name.capitalize}",
     size: 36, style: :bold,  align: :center
     move_down 5
     i = @poster.address.index(',')-1
     address = @poster.address[0..i]
-    text "#{@poster.pet.color.capitalize} #{@poster.pet.breed}, last seen near #{address}",
+
+    text "#{@poster.pet.color.capitalize}, #{@poster.pet.breed} #{@poster.pet.species.downcase}, last seen near #{address}",
     size: 18, align: :center
+
     move_down 5
     text "Missing since #{@poster.date_missing.strftime("%A, %B %d, %Y")}",
     size: 18, align: :center
