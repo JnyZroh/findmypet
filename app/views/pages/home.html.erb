@@ -7,22 +7,42 @@
     <img src="<%= image_path('wave.png') %>" alt="Overlay">
   </div>
 
-  <div class="container">
-    <div class="d-flex justify-content-between mb-4 text-center" style="margin-top: 30px;">
-      <div class="col-5 mx-auto">
-        <%= link_to new_poster_path, class:"btn grow", style:"width: 150px; font-size:normal; border-color: white; background-color: white; color: #046E8F; border-radius: 10px; " do %>
-          <span style="font-weight:bold; font-size:200%;">＋</span><br>
-          Lost My Pet
-        <% end %>
-      </div>
-      <div class="col-5 mx-auto">
-        <%= link_to new_report_path, class:"btn grow", style:"width: 150px; font-size:normal; border-color: white; background-color: white; color: #046E8F; border-radius: 10px;" do %>
-          <span style="font-weight:bold; font-size:200%;">＋</span><br>
-          Spotted a Pet
-        <% end %>
+  <% if user_signed_in? %>
+    <div class="container">
+      <div class="d-flex justify-content-between mb-4 text-center" style="margin-top: 30px;">
+        <div class="col-5 mx-auto">
+          <%= link_to new_poster_path, class:"btn grow", style:"width: 150px; font-size:normal; border-color: white; background-color: white; color: #046E8F; border-radius: 10px; " do %>
+            <span style="font-weight:bold; font-size:200%;">＋</span><br>
+            Lost My Pet
+          <% end %>
+        </div>
+        <div class="col-5 mx-auto">
+          <%= link_to new_report_path, class:"btn grow", style:"width: 150px; font-size:normal; border-color: white; background-color: white; color: #046E8F; border-radius: 10px;" do %>
+            <span style="font-weight:bold; font-size:200%;">＋</span><br>
+            Spotted a Pet
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
+  <% else %>
+    <div class="container">
+      <div class="d-flex justify-content-between mb-4 text-center" style="margin-top: 30px;">
+        <div class="col-5 mx-auto">
+          <%= link_to new_user_session_path, class:"btn grow", style:"width: 150px; font-size:normal; border-color: white; background-color: white; color: #046E8F; border-radius: 10px; " do %>
+            <span style="font-weight:bold; font-size:200%;">＋</span><br>
+            Lost My Pet
+          <% end %>
+        </div>
+        <div class="col-5 mx-auto">
+          <%= link_to new_user_session_path, class:"btn grow", style:"width: 150px; font-size:normal; border-color: white; background-color: white; color: #046E8F; border-radius: 10px;" do %>
+            <span style="font-weight:bold; font-size:200%;">＋</span><br>
+            Spotted a Pet
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
 
   <% if user_signed_in? %>
     <div class="container">
