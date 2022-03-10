@@ -132,9 +132,11 @@
 
               <div class="row">
                 <% if !@chatrooms.empty? %>
+                  <% if !@chatrooms.last.messages.empty? %>
                     <% if @chatrooms.last.messages.last.user != current_user  %>
                       <div class="updates">Check your recent message!</div>
                     <% end %>
+                  <% end %>
                 <% end %>
                   <div class="updates">Your poster is live.</div>
               </div>
