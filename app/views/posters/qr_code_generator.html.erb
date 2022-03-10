@@ -1,0 +1,23 @@
+<%# Basically the view is to display a form where the user can add
+his text or URL and then it sends a request to qr_code_download
+which actually generates a PNG for the QR code.
+
+The QR code will be downloaded on the user device since we
+use disposition: 'attachment'. %>
+
+<%# Finally, if we prefer to display the QR code instead of
+downloading it, we can use a method similar to qr_code_download
+but with disposition: 'inline'. %>
+
+<h1>QR code generator</h1>
+
+<%= form_tag :qr_code_download, method: :get do |f| %>
+  <div class="field">
+    <%= label_tag 'Text or URL' %>
+    <%= text_field_tag :content, nil, required: true %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag 'Generate QR code' %>
+  </div>
+<% end %>

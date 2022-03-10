@@ -42,17 +42,16 @@ class PostersController < ApplicationController
 
   def print
     @poster = Poster.find(params[:poster_id])
-
+    url = request.original_url.slice(0...-10) # removes "/print.pdf"
     respond_to do |format|
       format.html
       format.pdf do
-        pdf = PosterPdf.new(@poster)
+        pdf = PosterPdf.new(@poster, url)
         send_data pdf.render, filename: "missing_pet_#{@poster.pet.name}.pdf",
                               type: "application/pdf",
                               disposition: "inline"
       end
     end
-
   end
 
   def mark_as_found
