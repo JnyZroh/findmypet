@@ -36,6 +36,7 @@ gem 'cloudinary', '~> 1.16.0'
 gem "geocoder"
 
 gem 'prawn'
+gem 'prawn-qrcode'
 
 group :development, :test do
   gem 'pry-byebug'
