@@ -54,8 +54,8 @@
     <li class="list-group-item pt-3 pb-3 text-center" style="color:#004358;">
       <%= @poster.address %>
     </li>
-    <li class="list-group-item pt-0 pb-0" style="color:#004358;">
-      <div style="width: 100%; height: 200px;"
+    <li class="list-group-item p-0" style="color:#004358;">
+      <div style="width: 100%; height: 200px; border-bottom-right-radius: 14px; border-bottom-left-radius: 14px;"
         data-controller="mapbox"
         data-mapbox-markers-value="<%= @markers.to_json %>"
         data-mapbox-api-key-value="<%= ENV['MAPBOX_API_KEY']%>"
