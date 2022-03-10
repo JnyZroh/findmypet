@@ -119,7 +119,12 @@
 
     <% if @posters.any? %>
       <div class="row row-cols-2 row-cols-md-4 gy-3 m-0">
-        <% @posters.last(4).each do |poster| %>
+        <% if user_signed_in? %>
+          <% custom_posters = @posters.where.not(pet: current_user.pets).last(4) %>
+        <% else %>
+          <% custom_posters = @posters.last(4) %>
+        <% end %>
+        <% custom_posters.each do |poster| %>
           <% if poster.pet.user != current_user %>
             <div class="col mb-4">
               <div class="card mx-auto" style="height: 250px; border-radius: 20px; max-width: 170px; border: 0;">
