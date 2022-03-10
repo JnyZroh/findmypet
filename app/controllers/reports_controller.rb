@@ -20,6 +20,15 @@ class ReportsController < ApplicationController
 
   def show
     @report = Report.find(params[:id])
+    @markers =
+    [{
+      lat: @report.latitude,
+      lng: @report.longitude,
+      info_window: render_to_string(partial: "pets/info_window_report", locals: { report: @report }),
+          image_url: helpers.asset_url("reporticon.png")
+    }]
+
+
   end
 
   def edit
