@@ -35,27 +35,27 @@ file5 = URI.open('https://avatars.githubusercontent.com/u/93945915?v=4')
 user5.photo.attach(io: file5, filename: 'dp.png', content_type: 'image/png')
 user5.save!
 
-pet1 = Pet.new(name: "Fluffy", species: "Dog", breed: "Husky", color: "red", description: "Red Husky with white ears. She's large but very friendly. She should be pretty easy to catch.", user: user1)
+pet1 = Pet.new(name: "Fluffy", species: "Dog", breed: "Husky", color: "Red", description: "Red Husky with white ears. She's large but very friendly. She should be pretty easy to catch.", user: user1)
 pet1.photos.attach(io: File.open(Rails.root.join('app/assets/images/Pet1_Red_Husky_home.png')),
                   filename: 'Pet1_Red_Husky_home.png')
 pet1.save!
 
-pet2 = Pet.new(name: "Scotty", species: "Cat", breed: "Scottish Fold", color: "multi-colored", description: "He's grey and brown, with bright green eyes and stripes. He's a housecat. A bit nervous so please approach him slowly. Lure with food, if possible.", user: user2)
+pet2 = Pet.new(name: "Scotty", species: "Cat", breed: "Scottish Fold", color: "Multi-Colored", description: "He's grey and brown, with bright green eyes and stripes. He's a housecat. A bit nervous so please approach him slowly. Lure with food, if possible.", user: user2)
 pet2.photos.attach(io: File.open(Rails.root.join('app/assets/images/Pet2_stripped_scottish_cat.jpg')),
                   filename: 'Pet2_stripped_scottish_cat.jpg')
 pet2.save!
 
-pet3 = Pet.new(name: "Sesame", species: "Dog", breed: "Mixed", color: "black", description: "Black with a white belly and brown eyes. He likes to hide in the bushes when he's afraid. He still has a blue and yellow leash attached.", user: user4)
+pet3 = Pet.new(name: "Sesame", species: "Dog", breed: "Mixed", color: "Black", description: "Black with a white belly and brown eyes. He likes to hide in the bushes when he's afraid. He still has a blue and yellow leash attached.", user: user4)
 pet3.photos.attach(io: File.open(Rails.root.join('app/assets/images/Pet3_Black_Lab_bush.png')),
                   filename: 'Pet3_Black_Lab_bush.png')
 pet3.save!
 
-pet4 = Pet.new(name: "Ozu", species: "Cat", breed: "Mixed", color: "gray", description: "A little bit feisty! Friendly but timid. And he will bite but he's small so it won't hurt!", user: user5)
+pet4 = Pet.new(name: "Ozu", species: "Cat", breed: "Mixed", color: "Gray", description: "A little bit feisty! Friendly but timid. And he will bite but he's small so it won't hurt!", user: user5)
 pet4.photos.attach(io: File.open(Rails.root.join('app/assets/images/Pet4_Cat_mixed_home.png')),
                   filename: 'Pet4_Cat_mixed_home.png')
 pet4.save!
 
-pet5 = Pet.new(name: "Ozu", species: "Cat", breed: "Mixed", color: "gray", description: "A little bit feisty! Friendly but timid. And he will bite but he's small so it won't hurt!", user: user1)
+pet5 = Pet.new(name: "Whiskers", species: "Cat", breed: "Mixed", color: "Multi-Colored", description: "A little bit feisty! Friendly but timid. And he will bite but he's small so it won't hurt!", user: user1)
 pet5.photos.attach(io: File.open(Rails.root.join('app/assets/images/Pet5_Cat_mixed_home.png')),
                   filename: 'Pet5_Cat_mixed_home.png')
 pet5.save!
