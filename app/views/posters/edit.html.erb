@@ -1,23 +1,24 @@
 <div class="container" data-controller="poster-form">
-  <h1 class="form-labels text-center mt-3">Edit Poster Info</h1>
+    <div class="d-flex justify-content-center my-3">
+      <div class="card border-0" style="width: 65%; border-radius: 20px; max-width: 200px;">
+        <% photo_url = @poster.pet.photos.empty? ? 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png' : cl_image_path(@poster.pet.photos[0].key) %>
+        <img src="<%= photo_url %>" class="card-img-top rounded-bottom" style="height: 175px; object-fit: cover; border-radius: 17px;" alt="Pet photo">
+        <div class="card-body text-center">
+          <h5 class="card-title"><strong><%= @poster.pet.name %></strong></h5>
+          <p class="card-text">Last seen: <%= @poster.address %></p>
+          <p class="card-text"><strong><%= @poster.date_missing %></strong></p>
+        </div>
+      </div>
+    </div>
+  <h1 class="form-labels text-center mt-3">Add a Description</h1>
   <div class="row">
     <div class="col-1"></div>
     <div class="col-10">
+<div class="vh-50"></div>
       <%= simple_form_for @poster do |p| %>
+
         <%= p.simple_fields_for :pet do |f| %>
-          <%= f.input :name, input_html: {class: "mapboxgl-ctrl-geocoder"}, label_html: {class: "h3 form-labels"}, placeholder: 'Pet Name'%>
-          <%= p.input :date_missing, as: :string, input_html: {class: "datepicker mapboxgl-ctrl-geocoder"}, label_html: {class: "h3 form-labels"} %>
-          <%= p.input :address, input_html: {class: "mapboxgl-ctrl-geocoder"}, label_html: {class: "h3 form-labels"}, required: false %>
-          <%= f.input :species, label: 'Features', as: :select, collection: ['Dog', 'Cat'], prompt: 'Species', input_html: { data: {
-            poster_form_target: "species",
-            action: 'change->poster-form#update'
-          }, class: "mapboxgl-ctrl-geocoder"}, label_html: {class: "h3 form-labels"} %>
-          <%= f.input :breed, label: false, as: :select, collection: [], prompt: 'Breed', input_html: { data: {
-            poster_form_target: "breed"
-          }, class: "mapboxgl-ctrl-geocoder"} %>
-          <%= f.input :color, label: false, as: :select, collection: ['Black', 'Brown', 'White', 'Gray', 'Red', 'Multi-Colored'], prompt: 'Color', input_html: {class: "mapboxgl-ctrl-geocoder"} %>
-          <%= p.input :comment, input_html: {class: "mapboxgl-ctrl-geocoder"}, label_html: {class: "h3 form-labels"} %>
-          <%#= f.input :photos, as: :file, input_html: { multiple: true } %>
+          <%= p.input :comment, input_html: {class: "mapboxgl-ctrl-geocoder", style: "min-height: 100px" }, label_html: {class: "h3 form-labels"}, :label => false %>
         <% end %>
 
         <div class="row">

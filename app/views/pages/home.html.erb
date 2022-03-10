@@ -122,14 +122,16 @@
                   <img src="<%= image_path('overlay.png') %>" class="card-img-top image2 rounded-bottom" style="object-fit: cover; border-radius: 20px; height: 135px;" alt="Overlay">
                 </div>
                 <div class="card-body text-center p-1">
-                  <h5 class="card-title" style="font-size: 24px;">
+                  <h5 class="card-title" style="font-size: 20px;">
                     <strong><%= poster.pet.name %></strong>
                   </h5>
                   <p class="card-text" style="font-size: 15px;">
                     Last seen:
                   </p>
                   <p class="card-text" style="font-size: 14px; line-height: 1em;">
-                    <%= truncate(poster.address) %>
+                    <% i = poster.address.index(',')-1 %>
+                    <% address = poster.address[0..i] %>
+                    <%= address %>
                   </p>
                   <p class="card-text" style="font-size: 15px; line-height: 2em;">
                     <strong><%= poster.date_missing %></strong>
@@ -174,7 +176,9 @@
                     Last seen:
                   </p>
                   <p class="card-text" style="font-size: 14px; line-height: 1em;">
-                    <%= truncate(report.address) %>
+                    <% i = report.address.index(',')-1 %>
+                    <% address = report.address[0..i] %>
+                    <%= address %>
                   </p>
                   <p class="card-text" style="font-size: 15px; line-height: 2em;">
                     <strong><%= report.date_spotted %></strong>

@@ -2,7 +2,7 @@ class Poster < ApplicationRecord
   belongs_to :pet
   # belongs_to :user
 
-  validates :address, presence: true
+  validates :address, :date_missing, presence: true
 
   accepts_nested_attributes_for :pet
 
