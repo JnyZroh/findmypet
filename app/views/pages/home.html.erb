@@ -84,15 +84,19 @@
                       <% end %>
 
                       <% if !@chatrooms.empty? %>
-                        <% if @chatrooms.last.messages.last.user != current_user  %>
-                          <div class="updates">Check your recent message!</div>
+                        <% if !@chatrooms.last.messages.empty? %>
+                          <% if @chatrooms.last.messages.last.user != current_user  %>
+                            <div class="updates">Check your recent message!</div>
+                          <% end %>
                         <% end %>
                       <% else %>
                         <div class="updates">Your poster is live.</div>
                       <% end %>
 
-                      <% if @chatrooms.last.messages.last.user == current_user && !@nearby.any? %>
-                        <div class="updates">No recent updates.</div>
+                      <% if !@chatrooms.last.messages.empty? %>
+                        <% if @chatrooms.last.messages.last.user == current_user && !@nearby.any? %>
+                          <div class="updates">No recent updates.</div>
+                        <% end %>
                       <% end %>
                       <div style="text-align:right"><%= link_to "View all", "/dashboard", class: "seeMoreLink"%></div>
                   </div>
