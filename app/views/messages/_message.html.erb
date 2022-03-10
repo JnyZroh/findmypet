@@ -10,7 +10,14 @@
         <i style="opacity: 0.75; font-size: 12px;"><%= message.created_at.strftime("%a %b %e at %l:%M %p") %></i>
       </small>
       <% if message.photo.key %>
-        <img src="<%= cl_image_path(message.photo.key) %>" class="img-fluid mx-auto d-block" style="object-fit: cover; width: 150px; height:150px; border-radius: 10px;" alt="message picture">
+        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
+          onClick="(function(){document.getElementById('exampleModal').getElementsByClassName('image-body')[0].src = '<%= cl_image_path(message.photo.key) %>';
+              })();return false;">
+          <img  src="<%= cl_image_path(message.photo.key) %>"
+                class="img-fluid mx-auto d-block"
+                style="object-fit: cover; width: 150px; height:150px; border-radius: 10px;"
+                alt="message picture">
+        </a>
       <% end %>
       <p class="m-0"><%= message.content %></p>
     </div>

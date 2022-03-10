@@ -1,2 +1,11 @@
-<h3><%= poster.pet.name %></h3>
-<p><%= poster.address %></p>
+<div class="row">
+  <div class="col-6">
+    <img  src="<%= cl_image_path(poster.pet.photos[0].key) %>"
+          style="object-fit: cover; width: 90px; height:90px; border-radius: 10px;"
+          alt="report picture">
+  </div>
+  <div class="col-6 d-flex align-items-center">
+    <h3 class="text-center"><%= poster.pet.name %></h3>
+  </div>
+</div>
+<%= link_to "", poster_path(poster.id), class:"stretched-link"%>
