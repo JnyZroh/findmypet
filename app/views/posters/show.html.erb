@@ -64,18 +64,13 @@
     </li>
   </ul>
 
-  <div class="row m-3">
-    <div class="col-6 d-flex justify-content-start">
-      <%= link_to "Home", root_path, class:"btn btn-lg d-flex align-items-center", style:"background-color: #616161; color: white; border-radius: 10px;" %>
-    </div>
     <% if current_user == @poster.pet.user %>
-      <div class="col-6 d-flex justify-content-end">
+      <div class="d-flex justify-content-center mt-3 mb-3">
           <%= link_to "Print", print_poster_path(@poster), class:"btn btn-lg", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
       </div>
     <% else %>
-      <div class="col-6 d-flex justify-content-end">
+      <div class="d-flex justify-content-center mt-3 mb-3">
           <%= link_to "Message #{@poster.pet.user.first_name}", contact_path(@poster.pet.user), class:"btn d-flex align-items-center", style:"background-color: #046E8F; color: white; border-radius: 10px;" %>
       </div>
     <% end %>
-  </div>
 </div>
