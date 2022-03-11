@@ -56,7 +56,5 @@ class PosterPdf < Prawn::Document
     @qrcode_content = url
     print_qr_code(@qrcode_content, :dot=>2.8)
     move_down 2
-    text "findinglostpets.xyz",
-    size: 12, align: :left
   end
 end
