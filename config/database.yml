@@ -24,7 +24,8 @@ default: &default
 development:
   <<: *default
   database: findmypet_development
-
+  username: postgres
+  password: <%= ENV['PG_PASSWORD'] %>
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
@@ -58,6 +59,8 @@ development:
 test:
   <<: *default
   database: findmypet_test
+  username: postgres
+  password: <%= ENV['PG_PASSWORD'] %>
 
 # As with config/credentials.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -81,6 +84,10 @@ test:
 #
 production:
   <<: *default
-  database: findmypet_production
-  username: findmypet
-  password: <%= ENV['FINDMYPET_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+#   database:
+#   username:
+#   password:
+  # database: findmypet_production
+  # username: findmypet
+  # password: <%= ENV['FINDMYPET_DATABASE_PASSWORD'] %>
